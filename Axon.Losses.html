@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.25.3">
+    <meta name="project" content="Axon v0.1.0-dev">
+
+    <title>Axon.Losses — Axon v0.1.0-dev</title>
+    <link rel="stylesheet" href="dist/elixir-37545fd2f35b96531434.css" />
+
+    <script src="dist/sidebar_items-61fb6dad2a.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-e5e774c81fa6257aba7f.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="Axon.html" class="sidebar-projectName">
+Axon
+      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.0-dev
+      </strong>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+Axon.Losses <small class="app-vsn">(Axon v0.1.0-dev)</small>
+
+          <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+
+      </h1>
+
+
+        <section id="moduledoc">
+<p>Loss functions.</p><p>Loss functions evaluate predictions with respect to true
+data, often to measure the divergence between a model's
+representation of the data-generating distribution and the
+true representation of the data-generating distribution.</p><p>Each loss function is implemented as an element-wise function
+measuring the loss with respect to the input target <code class="inline">y_true</code>
+and input prediction <code class="inline">y_pred</code>. As an example, the <a href="#mean_squared_error/2"><code class="inline">mean_squared_error/2</code></a>
+loss function produces a tensor whose values are the mean squared
+error between targets and predictions:</p><pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5630837437-1">(</span><span class="p" data-group-id="5630837437-2">[</span><span class="p" data-group-id="5630837437-3">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="5630837437-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5630837437-4">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="5630837437-4">]</span><span class="p" data-group-id="5630837437-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5630837437-5">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5630837437-5">}</span><span class="p" data-group-id="5630837437-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5630837437-6">(</span><span class="p" data-group-id="5630837437-7">[</span><span class="p" data-group-id="5630837437-8">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="5630837437-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5630837437-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="5630837437-9">]</span><span class="p" data-group-id="5630837437-7">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5630837437-10">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5630837437-10">}</span><span class="p" data-group-id="5630837437-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p" data-group-id="5630837437-11">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="5630837437-11">)</span><span class="w">
+</span><span class="p" data-group-id="5630837437-12">#</span><span class="nc" data-group-id="5630837437-12">Nx.Tensor</span><span class="p" data-group-id="5630837437-12">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="5630837437-13">[</span><span class="mi">2</span><span class="p" data-group-id="5630837437-13">]</span><span class="w">
+  </span><span class="p" data-group-id="5630837437-14">[</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p" data-group-id="5630837437-14">]</span><span class="w">
+</span><span class="p" data-group-id="5630837437-12">&gt;</span></code></pre><p>It's common to compute the loss across an entire minibatch.
+You can easily do so by specifying a <code class="inline">:reduction</code> mode, or
+by composing one of these with an <a href="https://hexdocs.pm/nx/0.1.0-dev/Nx.html"><code class="inline">Nx</code></a> reduction method:</p><pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7722709365-1">(</span><span class="p" data-group-id="7722709365-2">[</span><span class="p" data-group-id="7722709365-3">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="7722709365-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7722709365-4">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="7722709365-4">]</span><span class="p" data-group-id="7722709365-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7722709365-5">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7722709365-5">}</span><span class="p" data-group-id="7722709365-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7722709365-6">(</span><span class="p" data-group-id="7722709365-7">[</span><span class="p" data-group-id="7722709365-8">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="7722709365-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7722709365-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="7722709365-9">]</span><span class="p" data-group-id="7722709365-7">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7722709365-10">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7722709365-10">}</span><span class="p" data-group-id="7722709365-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p" data-group-id="7722709365-11">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="7722709365-11">)</span><span class="w">
+</span><span class="p" data-group-id="7722709365-12">#</span><span class="nc" data-group-id="7722709365-12">Nx.Tensor</span><span class="p" data-group-id="7722709365-12">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.5</span><span class="w">
+</span><span class="p" data-group-id="7722709365-12">&gt;</span></code></pre><p>You can even compose loss functions:</p><pre><code class="makeup elixir"><span class="kd">defn</span><span class="w"> </span><span class="nf">my_strange_loss</span><span class="p" data-group-id="0333277259-1">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="0333277259-1">)</span><span class="w"> </span><span class="k" data-group-id="0333277259-2">do</span><span class="w">
+  </span><span class="n">y_true</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p" data-group-id="0333277259-3">(</span><span class="n">y_pred</span><span class="p" data-group-id="0333277259-3">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">binary_cross_entropy</span><span class="p" data-group-id="0333277259-4">(</span><span class="n">y_pred</span><span class="p" data-group-id="0333277259-4">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">sum</span><span class="p" data-group-id="0333277259-5">(</span><span class="p" data-group-id="0333277259-5">)</span><span class="w">
+</span><span class="k" data-group-id="0333277259-2">end</span></code></pre><p>Or, more commonly, you can combine loss functions with penalties for
+regularization:</p><pre><code class="makeup elixir"><span class="kd">defn</span><span class="w"> </span><span class="nf">regularized_loss</span><span class="p" data-group-id="3064518944-1">(</span><span class="n">params</span><span class="p">,</span><span class="w"> </span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="3064518944-1">)</span><span class="w"> </span><span class="k" data-group-id="3064518944-2">do</span><span class="w">
+  </span><span class="n">loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p" data-group-id="3064518944-3">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="3064518944-3">)</span><span class="w">
+  </span><span class="n">penalty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l2_penalty</span><span class="p" data-group-id="3064518944-4">(</span><span class="n">params</span><span class="p" data-group-id="3064518944-4">)</span><span class="w">
+  </span><span class="nc">Nx</span><span class="o">.</span><span class="n">sum</span><span class="p" data-group-id="3064518944-5">(</span><span class="n">loss</span><span class="p" data-group-id="3064518944-5">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">penalty</span><span class="w">
+</span><span class="k" data-group-id="3064518944-2">end</span></code></pre><p>All of the functions in this module are implemented as
+numerical functions and can be JIT or AOT compiled with
+any supported <a href="https://hexdocs.pm/nx/0.1.0-dev/Nx.html"><code class="inline">Nx</code></a> compiler.</p>
+        </section>
+
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#binary_cross_entropy/3">binary_cross_entropy(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Binary cross-entropy loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#categorical_cross_entropy/3">categorical_cross_entropy(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Categorical cross-entropy loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#categorical_hinge/3">categorical_hinge(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Categorical hinge loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#hinge/3">hinge(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Hinge loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#kl_divergence/3">kl_divergence(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Kullback-Leibler divergence loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#log_cosh/3">log_cosh(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Logarithmic-Hyperbolic Cosine loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#margin_ranking/3">margin_ranking(y_true, arg2, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Margin ranking loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#mean_absolute_error/3">mean_absolute_error(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Mean-absolute error loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#mean_squared_error/3">mean_squared_error(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Mean-squared error loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#poisson/3">poisson(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Poisson loss function.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#soft_margin/3">soft_margin(y_true, y_pred, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Soft margin loss function.</p></div>
+
+</div>
+
+  </div>
+
+        </section>
+
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions
+          </h1>
+          <div class="functions-list">
+<section class="detail" id="binary_cross_entropy/3">
+
+    <span id="binary_cross_entropy/2"></span>
+
+  <div class="detail-header">
+    <a href="#binary_cross_entropy/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">binary_cross_entropy(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Binary cross-entropy loss function.</p><p>$$l_i = -\frac{1}{2}(\hat{y_i} \cdot \log(y_i) + (1 - \hat{y_i}) \cdot \log(1 - y_i))$$</p><h2 id="binary_cross_entropy/3-argument-shapes" class="section-heading">
+  <a href="#binary_cross_entropy/3-argument-shapes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Argument Shapes
+</h2>
+<ul><li><code class="inline">y_true</code> - $(d_0, d_1, ..., d_n)$</li><li><code class="inline">y_pred</code> - $(d_0, d_1, ..., d_n)$</li></ul><h2 id="binary_cross_entropy/3-options" class="section-heading">
+  <a href="#binary_cross_entropy/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="binary_cross_entropy/3-examples" class="section-heading">
+  <a href="#binary_cross_entropy/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="0680084172-1">(</span><span class="p" data-group-id="0680084172-2">[</span><span class="p" data-group-id="0680084172-3">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="0680084172-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-4">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="0680084172-4">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-5">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="0680084172-5">]</span><span class="p" data-group-id="0680084172-2">]</span><span class="p" data-group-id="0680084172-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="0680084172-6">(</span><span class="p" data-group-id="0680084172-7">[</span><span class="p" data-group-id="0680084172-8">[</span><span class="mf">0.6811</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5565</span><span class="p" data-group-id="0680084172-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-9">[</span><span class="mf">0.6551</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4551</span><span class="p" data-group-id="0680084172-9">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-10">[</span><span class="mf">0.5422</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2648</span><span class="p" data-group-id="0680084172-10">]</span><span class="p" data-group-id="0680084172-7">]</span><span class="p" data-group-id="0680084172-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">binary_cross_entropy</span><span class="p" data-group-id="0680084172-11">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="0680084172-11">)</span><span class="w">
+</span><span class="p" data-group-id="0680084172-12">#</span><span class="nc" data-group-id="0680084172-12">Nx.Tensor</span><span class="p" data-group-id="0680084172-12">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="0680084172-13">[</span><span class="mi">3</span><span class="p" data-group-id="0680084172-13">]</span><span class="w">
+  </span><span class="p" data-group-id="0680084172-14">[</span><span class="mf">0.8644828796386719</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5150601863861084</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4598664939403534</span><span class="p" data-group-id="0680084172-14">]</span><span class="w">
+</span><span class="p" data-group-id="0680084172-12">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="0680084172-15">(</span><span class="p" data-group-id="0680084172-16">[</span><span class="p" data-group-id="0680084172-17">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="0680084172-17">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-18">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="0680084172-18">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-19">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="0680084172-19">]</span><span class="p" data-group-id="0680084172-16">]</span><span class="p" data-group-id="0680084172-15">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="0680084172-20">(</span><span class="p" data-group-id="0680084172-21">[</span><span class="p" data-group-id="0680084172-22">[</span><span class="mf">0.6811</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5565</span><span class="p" data-group-id="0680084172-22">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-23">[</span><span class="mf">0.6551</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4551</span><span class="p" data-group-id="0680084172-23">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-24">[</span><span class="mf">0.5422</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2648</span><span class="p" data-group-id="0680084172-24">]</span><span class="p" data-group-id="0680084172-21">]</span><span class="p" data-group-id="0680084172-20">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">binary_cross_entropy</span><span class="p" data-group-id="0680084172-25">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="0680084172-25">)</span><span class="w">
+</span><span class="p" data-group-id="0680084172-26">#</span><span class="nc" data-group-id="0680084172-26">Nx.Tensor</span><span class="p" data-group-id="0680084172-26">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.6131365299224854</span><span class="w">
+</span><span class="p" data-group-id="0680084172-26">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="0680084172-27">(</span><span class="p" data-group-id="0680084172-28">[</span><span class="p" data-group-id="0680084172-29">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="0680084172-29">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-30">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="0680084172-30">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-31">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="0680084172-31">]</span><span class="p" data-group-id="0680084172-28">]</span><span class="p" data-group-id="0680084172-27">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="0680084172-32">(</span><span class="p" data-group-id="0680084172-33">[</span><span class="p" data-group-id="0680084172-34">[</span><span class="mf">0.6811</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5565</span><span class="p" data-group-id="0680084172-34">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-35">[</span><span class="mf">0.6551</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4551</span><span class="p" data-group-id="0680084172-35">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0680084172-36">[</span><span class="mf">0.5422</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2648</span><span class="p" data-group-id="0680084172-36">]</span><span class="p" data-group-id="0680084172-33">]</span><span class="p" data-group-id="0680084172-32">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">binary_cross_entropy</span><span class="p" data-group-id="0680084172-37">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="0680084172-37">)</span><span class="w">
+</span><span class="p" data-group-id="0680084172-38">#</span><span class="nc" data-group-id="0680084172-38">Nx.Tensor</span><span class="p" data-group-id="0680084172-38">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">1.839409589767456</span><span class="w">
+</span><span class="p" data-group-id="0680084172-38">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="categorical_cross_entropy/3">
+
+    <span id="categorical_cross_entropy/2"></span>
+
+  <div class="detail-header">
+    <a href="#categorical_cross_entropy/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">categorical_cross_entropy(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Categorical cross-entropy loss function.</p><p>$$l_i = -\sum_i^C \hat{y_i} \cdot \log(y_i)$$</p><h2 id="categorical_cross_entropy/3-argument-shapes" class="section-heading">
+  <a href="#categorical_cross_entropy/3-argument-shapes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Argument Shapes
+</h2>
+<ul><li><code class="inline">y_true</code> - $(d_0, d_1, ..., d_n)$</li><li><code class="inline">y_pred</code> - $(d_0, d_1, ..., d_n)$</li></ul><h2 id="categorical_cross_entropy/3-options" class="section-heading">
+  <a href="#categorical_cross_entropy/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="categorical_cross_entropy/3-examples" class="section-heading">
+  <a href="#categorical_cross_entropy/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="9258640845-1">(</span><span class="p" data-group-id="9258640845-2">[</span><span class="p" data-group-id="9258640845-3">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="9258640845-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9258640845-4">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="9258640845-4">]</span><span class="p" data-group-id="9258640845-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9258640845-5">{</span><span class="ss">:s</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="9258640845-5">}</span><span class="p" data-group-id="9258640845-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="9258640845-6">(</span><span class="p" data-group-id="9258640845-7">[</span><span class="p" data-group-id="9258640845-8">[</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="9258640845-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9258640845-9">[</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p" data-group-id="9258640845-9">]</span><span class="p" data-group-id="9258640845-7">]</span><span class="p" data-group-id="9258640845-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">categorical_cross_entropy</span><span class="p" data-group-id="9258640845-10">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="9258640845-10">)</span><span class="w">
+</span><span class="p" data-group-id="9258640845-11">#</span><span class="nc" data-group-id="9258640845-11">Nx.Tensor</span><span class="p" data-group-id="9258640845-11">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="9258640845-12">[</span><span class="mi">2</span><span class="p" data-group-id="9258640845-12">]</span><span class="w">
+  </span><span class="p" data-group-id="9258640845-13">[</span><span class="mf">0.051293306052684784</span><span class="p">,</span><span class="w"> </span><span class="mf">2.3025851249694824</span><span class="p" data-group-id="9258640845-13">]</span><span class="w">
+</span><span class="p" data-group-id="9258640845-11">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="9258640845-14">(</span><span class="p" data-group-id="9258640845-15">[</span><span class="p" data-group-id="9258640845-16">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="9258640845-16">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9258640845-17">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="9258640845-17">]</span><span class="p" data-group-id="9258640845-15">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9258640845-18">{</span><span class="ss">:s</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="9258640845-18">}</span><span class="p" data-group-id="9258640845-14">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="9258640845-19">(</span><span class="p" data-group-id="9258640845-20">[</span><span class="p" data-group-id="9258640845-21">[</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="9258640845-21">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9258640845-22">[</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p" data-group-id="9258640845-22">]</span><span class="p" data-group-id="9258640845-20">]</span><span class="p" data-group-id="9258640845-19">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">categorical_cross_entropy</span><span class="p" data-group-id="9258640845-23">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="9258640845-23">)</span><span class="w">
+</span><span class="p" data-group-id="9258640845-24">#</span><span class="nc" data-group-id="9258640845-24">Nx.Tensor</span><span class="p" data-group-id="9258640845-24">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">1.1769392490386963</span><span class="w">
+</span><span class="p" data-group-id="9258640845-24">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="9258640845-25">(</span><span class="p" data-group-id="9258640845-26">[</span><span class="p" data-group-id="9258640845-27">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="9258640845-27">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9258640845-28">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="9258640845-28">]</span><span class="p" data-group-id="9258640845-26">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9258640845-29">{</span><span class="ss">:s</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="9258640845-29">}</span><span class="p" data-group-id="9258640845-25">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="9258640845-30">(</span><span class="p" data-group-id="9258640845-31">[</span><span class="p" data-group-id="9258640845-32">[</span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="9258640845-32">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9258640845-33">[</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p" data-group-id="9258640845-33">]</span><span class="p" data-group-id="9258640845-31">]</span><span class="p" data-group-id="9258640845-30">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">categorical_cross_entropy</span><span class="p" data-group-id="9258640845-34">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="9258640845-34">)</span><span class="w">
+</span><span class="p" data-group-id="9258640845-35">#</span><span class="nc" data-group-id="9258640845-35">Nx.Tensor</span><span class="p" data-group-id="9258640845-35">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">2.3538784980773926</span><span class="w">
+</span><span class="p" data-group-id="9258640845-35">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="categorical_hinge/3">
+
+    <span id="categorical_hinge/2"></span>
+
+  <div class="detail-header">
+    <a href="#categorical_hinge/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">categorical_hinge(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Categorical hinge loss function.</p><h2 id="categorical_hinge/3-argument-shapes" class="section-heading">
+  <a href="#categorical_hinge/3-argument-shapes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Argument Shapes
+</h2>
+<ul><li><code class="inline">y_true</code> - $(d_0, d_1, ..., d_n)$</li><li><code class="inline">y_pred</code> - $(d_0, d_1, ..., d_n)$</li></ul><h2 id="categorical_hinge/3-options" class="section-heading">
+  <a href="#categorical_hinge/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="categorical_hinge/3-examples" class="section-heading">
+  <a href="#categorical_hinge/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1986550242-1">(</span><span class="p" data-group-id="1986550242-2">[</span><span class="p" data-group-id="1986550242-3">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="1986550242-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1986550242-4">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="1986550242-4">]</span><span class="p" data-group-id="1986550242-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1986550242-5">{</span><span class="ss">:s</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="1986550242-5">}</span><span class="p" data-group-id="1986550242-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1986550242-6">(</span><span class="p" data-group-id="1986550242-7">[</span><span class="p" data-group-id="1986550242-8">[</span><span class="mf">0.05300799</span><span class="p">,</span><span class="w"> </span><span class="mf">0.21617081</span><span class="p">,</span><span class="w"> </span><span class="mf">0.68642382</span><span class="p" data-group-id="1986550242-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1986550242-9">[</span><span class="mf">0.3754382</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">0.08494169</span><span class="p">,</span><span class="w"> </span><span class="mf">0.13442067</span><span class="p" data-group-id="1986550242-9">]</span><span class="p" data-group-id="1986550242-7">]</span><span class="p" data-group-id="1986550242-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">categorical_hinge</span><span class="p" data-group-id="1986550242-10">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="1986550242-10">)</span><span class="w">
+</span><span class="p" data-group-id="1986550242-11">#</span><span class="nc" data-group-id="1986550242-11">Nx.Tensor</span><span class="p" data-group-id="1986550242-11">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="1986550242-12">[</span><span class="mi">2</span><span class="p" data-group-id="1986550242-12">]</span><span class="w">
+  </span><span class="p" data-group-id="1986550242-13">[</span><span class="mf">1.6334158182144165</span><span class="p">,</span><span class="w"> </span><span class="mf">1.2410175800323486</span><span class="p" data-group-id="1986550242-13">]</span><span class="w">
+</span><span class="p" data-group-id="1986550242-11">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1986550242-14">(</span><span class="p" data-group-id="1986550242-15">[</span><span class="p" data-group-id="1986550242-16">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="1986550242-16">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1986550242-17">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="1986550242-17">]</span><span class="p" data-group-id="1986550242-15">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1986550242-18">{</span><span class="ss">:s</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="1986550242-18">}</span><span class="p" data-group-id="1986550242-14">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1986550242-19">(</span><span class="p" data-group-id="1986550242-20">[</span><span class="p" data-group-id="1986550242-21">[</span><span class="mf">0.05300799</span><span class="p">,</span><span class="w"> </span><span class="mf">0.21617081</span><span class="p">,</span><span class="w"> </span><span class="mf">0.68642382</span><span class="p" data-group-id="1986550242-21">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1986550242-22">[</span><span class="mf">0.3754382</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">0.08494169</span><span class="p">,</span><span class="w"> </span><span class="mf">0.13442067</span><span class="p" data-group-id="1986550242-22">]</span><span class="p" data-group-id="1986550242-20">]</span><span class="p" data-group-id="1986550242-19">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">categorical_hinge</span><span class="p" data-group-id="1986550242-23">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="1986550242-23">)</span><span class="w">
+</span><span class="p" data-group-id="1986550242-24">#</span><span class="nc" data-group-id="1986550242-24">Nx.Tensor</span><span class="p" data-group-id="1986550242-24">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">1.4372167587280273</span><span class="w">
+</span><span class="p" data-group-id="1986550242-24">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1986550242-25">(</span><span class="p" data-group-id="1986550242-26">[</span><span class="p" data-group-id="1986550242-27">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="1986550242-27">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1986550242-28">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="1986550242-28">]</span><span class="p" data-group-id="1986550242-26">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1986550242-29">{</span><span class="ss">:s</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="1986550242-29">}</span><span class="p" data-group-id="1986550242-25">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1986550242-30">(</span><span class="p" data-group-id="1986550242-31">[</span><span class="p" data-group-id="1986550242-32">[</span><span class="mf">0.05300799</span><span class="p">,</span><span class="w"> </span><span class="mf">0.21617081</span><span class="p">,</span><span class="w"> </span><span class="mf">0.68642382</span><span class="p" data-group-id="1986550242-32">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1986550242-33">[</span><span class="mf">0.3754382</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">0.08494169</span><span class="p">,</span><span class="w"> </span><span class="mf">0.13442067</span><span class="p" data-group-id="1986550242-33">]</span><span class="p" data-group-id="1986550242-31">]</span><span class="p" data-group-id="1986550242-30">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">categorical_hinge</span><span class="p" data-group-id="1986550242-34">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="1986550242-34">)</span><span class="w">
+</span><span class="p" data-group-id="1986550242-35">#</span><span class="nc" data-group-id="1986550242-35">Nx.Tensor</span><span class="p" data-group-id="1986550242-35">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">2.8744335174560547</span><span class="w">
+</span><span class="p" data-group-id="1986550242-35">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="hinge/3">
+
+    <span id="hinge/2"></span>
+
+  <div class="detail-header">
+    <a href="#hinge/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">hinge(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Hinge loss function.</p><p>$$\frac{1}{C}\max_i(1 - \hat{y_i} * y_i, 0)$$</p><h2 id="hinge/3-options" class="section-heading">
+  <a href="#hinge/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="hinge/3-argument-shapes" class="section-heading">
+  <a href="#hinge/3-argument-shapes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Argument Shapes
+</h2>
+<ul><li><code class="inline">y_true</code> - $(d_0, d_1, ..., d_n)$</li><li><code class="inline">y_pred</code> - $(d_0, d_1, ..., d_n)$</li></ul><h2 id="hinge/3-examples" class="section-heading">
+  <a href="#hinge/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3173451774-1">(</span><span class="p" data-group-id="3173451774-2">[</span><span class="p" data-group-id="3173451774-3">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="3173451774-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3173451774-4">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="3173451774-4">]</span><span class="p" data-group-id="3173451774-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3173451774-5">{</span><span class="ss">:s</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="3173451774-5">}</span><span class="p" data-group-id="3173451774-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3173451774-6">(</span><span class="p" data-group-id="3173451774-7">[</span><span class="p" data-group-id="3173451774-8">[</span><span class="mf">0.45440044</span><span class="p">,</span><span class="w"> </span><span class="mf">0.31470688</span><span class="p">,</span><span class="w"> </span><span class="mf">0.67920924</span><span class="p" data-group-id="3173451774-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3173451774-9">[</span><span class="mf">0.24311459</span><span class="p">,</span><span class="w"> </span><span class="mf">0.93466766</span><span class="p">,</span><span class="w"> </span><span class="mf">0.10914676</span><span class="p" data-group-id="3173451774-9">]</span><span class="p" data-group-id="3173451774-7">]</span><span class="p" data-group-id="3173451774-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">hinge</span><span class="p" data-group-id="3173451774-10">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="3173451774-10">)</span><span class="w">
+</span><span class="p" data-group-id="3173451774-11">#</span><span class="nc" data-group-id="3173451774-11">Nx.Tensor</span><span class="p" data-group-id="3173451774-11">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="3173451774-12">[</span><span class="mi">2</span><span class="p" data-group-id="3173451774-12">]</span><span class="w">
+  </span><span class="p" data-group-id="3173451774-13">[</span><span class="mf">0.9700339436531067</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6437881588935852</span><span class="p" data-group-id="3173451774-13">]</span><span class="w">
+</span><span class="p" data-group-id="3173451774-11">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3173451774-14">(</span><span class="p" data-group-id="3173451774-15">[</span><span class="p" data-group-id="3173451774-16">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="3173451774-16">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3173451774-17">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="3173451774-17">]</span><span class="p" data-group-id="3173451774-15">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3173451774-18">{</span><span class="ss">:s</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="3173451774-18">}</span><span class="p" data-group-id="3173451774-14">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3173451774-19">(</span><span class="p" data-group-id="3173451774-20">[</span><span class="p" data-group-id="3173451774-21">[</span><span class="mf">0.45440044</span><span class="p">,</span><span class="w"> </span><span class="mf">0.31470688</span><span class="p">,</span><span class="w"> </span><span class="mf">0.67920924</span><span class="p" data-group-id="3173451774-21">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3173451774-22">[</span><span class="mf">0.24311459</span><span class="p">,</span><span class="w"> </span><span class="mf">0.93466766</span><span class="p">,</span><span class="w"> </span><span class="mf">0.10914676</span><span class="p" data-group-id="3173451774-22">]</span><span class="p" data-group-id="3173451774-20">]</span><span class="p" data-group-id="3173451774-19">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">hinge</span><span class="p" data-group-id="3173451774-23">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="3173451774-23">)</span><span class="w">
+</span><span class="p" data-group-id="3173451774-24">#</span><span class="nc" data-group-id="3173451774-24">Nx.Tensor</span><span class="p" data-group-id="3173451774-24">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.806911051273346</span><span class="w">
+</span><span class="p" data-group-id="3173451774-24">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3173451774-25">(</span><span class="p" data-group-id="3173451774-26">[</span><span class="p" data-group-id="3173451774-27">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="3173451774-27">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3173451774-28">[</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="3173451774-28">]</span><span class="p" data-group-id="3173451774-26">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3173451774-29">{</span><span class="ss">:s</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="3173451774-29">}</span><span class="p" data-group-id="3173451774-25">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3173451774-30">(</span><span class="p" data-group-id="3173451774-31">[</span><span class="p" data-group-id="3173451774-32">[</span><span class="mf">0.45440044</span><span class="p">,</span><span class="w"> </span><span class="mf">0.31470688</span><span class="p">,</span><span class="w"> </span><span class="mf">0.67920924</span><span class="p" data-group-id="3173451774-32">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3173451774-33">[</span><span class="mf">0.24311459</span><span class="p">,</span><span class="w"> </span><span class="mf">0.93466766</span><span class="p">,</span><span class="w"> </span><span class="mf">0.10914676</span><span class="p" data-group-id="3173451774-33">]</span><span class="p" data-group-id="3173451774-31">]</span><span class="p" data-group-id="3173451774-30">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">hinge</span><span class="p" data-group-id="3173451774-34">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="3173451774-34">)</span><span class="w">
+</span><span class="p" data-group-id="3173451774-35">#</span><span class="nc" data-group-id="3173451774-35">Nx.Tensor</span><span class="p" data-group-id="3173451774-35">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">1.613822102546692</span><span class="w">
+</span><span class="p" data-group-id="3173451774-35">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="kl_divergence/3">
+
+    <span id="kl_divergence/2"></span>
+
+  <div class="detail-header">
+    <a href="#kl_divergence/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">kl_divergence(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Kullback-Leibler divergence loss function.</p><p>$$l_i = \sum_i^C \hat{y_i} \cdot \log(\frac{\hat{y_i}}{y_i})$$</p><h2 id="kl_divergence/3-argument-shapes" class="section-heading">
+  <a href="#kl_divergence/3-argument-shapes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Argument Shapes
+</h2>
+<ul><li><code class="inline">y_true</code> - $(d_0, d_1, ..., d_n)$</li><li><code class="inline">y_pred</code> - $(d_0, d_1, ..., d_n)$</li></ul><h2 id="kl_divergence/3-options" class="section-heading">
+  <a href="#kl_divergence/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="kl_divergence/3-examples" class="section-heading">
+  <a href="#kl_divergence/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3378261817-1">(</span><span class="p" data-group-id="3378261817-2">[</span><span class="p" data-group-id="3378261817-3">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3378261817-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3378261817-4">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="3378261817-4">]</span><span class="p" data-group-id="3378261817-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3378261817-5">{</span><span class="ss">:u</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="3378261817-5">}</span><span class="p" data-group-id="3378261817-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3378261817-6">(</span><span class="p" data-group-id="3378261817-7">[</span><span class="p" data-group-id="3378261817-8">[</span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p" data-group-id="3378261817-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3378261817-9">[</span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p" data-group-id="3378261817-9">]</span><span class="p" data-group-id="3378261817-7">]</span><span class="p" data-group-id="3378261817-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">kl_divergence</span><span class="p" data-group-id="3378261817-10">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="3378261817-10">)</span><span class="w">
+</span><span class="p" data-group-id="3378261817-11">#</span><span class="nc" data-group-id="3378261817-11">Nx.Tensor</span><span class="p" data-group-id="3378261817-11">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="3378261817-12">[</span><span class="mi">2</span><span class="p" data-group-id="3378261817-12">]</span><span class="w">
+  </span><span class="p" data-group-id="3378261817-13">[</span><span class="mf">0.916289210319519</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.080907390540233e-6</span><span class="p" data-group-id="3378261817-13">]</span><span class="w">
+</span><span class="p" data-group-id="3378261817-11">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3378261817-14">(</span><span class="p" data-group-id="3378261817-15">[</span><span class="p" data-group-id="3378261817-16">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3378261817-16">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3378261817-17">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="3378261817-17">]</span><span class="p" data-group-id="3378261817-15">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3378261817-18">{</span><span class="ss">:u</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="3378261817-18">}</span><span class="p" data-group-id="3378261817-14">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3378261817-19">(</span><span class="p" data-group-id="3378261817-20">[</span><span class="p" data-group-id="3378261817-21">[</span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p" data-group-id="3378261817-21">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3378261817-22">[</span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p" data-group-id="3378261817-22">]</span><span class="p" data-group-id="3378261817-20">]</span><span class="p" data-group-id="3378261817-19">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">kl_divergence</span><span class="p" data-group-id="3378261817-23">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="3378261817-23">)</span><span class="w">
+</span><span class="p" data-group-id="3378261817-24">#</span><span class="nc" data-group-id="3378261817-24">Nx.Tensor</span><span class="p" data-group-id="3378261817-24">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.45814305543899536</span><span class="w">
+</span><span class="p" data-group-id="3378261817-24">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3378261817-25">(</span><span class="p" data-group-id="3378261817-26">[</span><span class="p" data-group-id="3378261817-27">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3378261817-27">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3378261817-28">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p" data-group-id="3378261817-28">]</span><span class="p" data-group-id="3378261817-26">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3378261817-29">{</span><span class="ss">:u</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p" data-group-id="3378261817-29">}</span><span class="p" data-group-id="3378261817-25">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3378261817-30">(</span><span class="p" data-group-id="3378261817-31">[</span><span class="p" data-group-id="3378261817-32">[</span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p" data-group-id="3378261817-32">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3378261817-33">[</span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p" data-group-id="3378261817-33">]</span><span class="p" data-group-id="3378261817-31">]</span><span class="p" data-group-id="3378261817-30">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">kl_divergence</span><span class="p" data-group-id="3378261817-34">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="3378261817-34">)</span><span class="w">
+</span><span class="p" data-group-id="3378261817-35">#</span><span class="nc" data-group-id="3378261817-35">Nx.Tensor</span><span class="p" data-group-id="3378261817-35">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.9162861108779907</span><span class="w">
+</span><span class="p" data-group-id="3378261817-35">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="log_cosh/3">
+
+    <span id="log_cosh/2"></span>
+
+  <div class="detail-header">
+    <a href="#log_cosh/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">log_cosh(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Logarithmic-Hyperbolic Cosine loss function.</p><p>$$l_i = \frac{1}{C} \sum_i^C (\hat{y_i} - y_i) + \log(1 + e^{-2(\hat{y_i} - y_i)}) - \log(2)$$</p><h2 id="log_cosh/3-argument-shapes" class="section-heading">
+  <a href="#log_cosh/3-argument-shapes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Argument Shapes
+</h2>
+<ul><li><code class="inline">y_true</code> - $(d_0, d_1, ..., d_n)$</li><li><code class="inline">y_pred</code> - $(d_0, d_1, ..., d_n)$</li></ul><h2 id="log_cosh/3-options" class="section-heading">
+  <a href="#log_cosh/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="log_cosh/3-examples" class="section-heading">
+  <a href="#log_cosh/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6212953562-1">(</span><span class="p" data-group-id="6212953562-2">[</span><span class="p" data-group-id="6212953562-3">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="6212953562-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6212953562-4">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="6212953562-4">]</span><span class="p" data-group-id="6212953562-2">]</span><span class="p" data-group-id="6212953562-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6212953562-5">(</span><span class="p" data-group-id="6212953562-6">[</span><span class="p" data-group-id="6212953562-7">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="6212953562-7">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6212953562-8">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="6212953562-8">]</span><span class="p" data-group-id="6212953562-6">]</span><span class="p" data-group-id="6212953562-5">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">log_cosh</span><span class="p" data-group-id="6212953562-9">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="6212953562-9">)</span><span class="w">
+</span><span class="p" data-group-id="6212953562-10">#</span><span class="nc" data-group-id="6212953562-10">Nx.Tensor</span><span class="p" data-group-id="6212953562-10">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="6212953562-11">[</span><span class="mi">2</span><span class="p" data-group-id="6212953562-11">]</span><span class="w">
+  </span><span class="p" data-group-id="6212953562-12">[</span><span class="mf">0.2168903946876526</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="6212953562-12">]</span><span class="w">
+</span><span class="p" data-group-id="6212953562-10">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6212953562-13">(</span><span class="p" data-group-id="6212953562-14">[</span><span class="p" data-group-id="6212953562-15">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="6212953562-15">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6212953562-16">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="6212953562-16">]</span><span class="p" data-group-id="6212953562-14">]</span><span class="p" data-group-id="6212953562-13">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6212953562-17">(</span><span class="p" data-group-id="6212953562-18">[</span><span class="p" data-group-id="6212953562-19">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="6212953562-19">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6212953562-20">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="6212953562-20">]</span><span class="p" data-group-id="6212953562-18">]</span><span class="p" data-group-id="6212953562-17">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">log_cosh</span><span class="p" data-group-id="6212953562-21">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="6212953562-21">)</span><span class="w">
+</span><span class="p" data-group-id="6212953562-22">#</span><span class="nc" data-group-id="6212953562-22">Nx.Tensor</span><span class="p" data-group-id="6212953562-22">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.1084451973438263</span><span class="w">
+</span><span class="p" data-group-id="6212953562-22">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6212953562-23">(</span><span class="p" data-group-id="6212953562-24">[</span><span class="p" data-group-id="6212953562-25">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="6212953562-25">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6212953562-26">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="6212953562-26">]</span><span class="p" data-group-id="6212953562-24">]</span><span class="p" data-group-id="6212953562-23">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6212953562-27">(</span><span class="p" data-group-id="6212953562-28">[</span><span class="p" data-group-id="6212953562-29">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="6212953562-29">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6212953562-30">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="6212953562-30">]</span><span class="p" data-group-id="6212953562-28">]</span><span class="p" data-group-id="6212953562-27">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">log_cosh</span><span class="p" data-group-id="6212953562-31">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="6212953562-31">)</span><span class="w">
+</span><span class="p" data-group-id="6212953562-32">#</span><span class="nc" data-group-id="6212953562-32">Nx.Tensor</span><span class="p" data-group-id="6212953562-32">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.2168903946876526</span><span class="w">
+</span><span class="p" data-group-id="6212953562-32">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="margin_ranking/3">
+
+    <span id="margin_ranking/2"></span>
+
+  <div class="detail-header">
+    <a href="#margin_ranking/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">margin_ranking(y_true, arg2, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Margin ranking loss function.</p><p>$$l_i = \max(0, -\hat{y_i} * (y^(1)_i - y^(2)_i) + \alpha)$$</p><h2 id="margin_ranking/3-options" class="section-heading">
+  <a href="#margin_ranking/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="margin_ranking/3-examples" class="section-heading">
+  <a href="#margin_ranking/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7133171792-1">(</span><span class="p" data-group-id="7133171792-2">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="7133171792-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7133171792-3">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7133171792-3">}</span><span class="p" data-group-id="7133171792-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7133171792-4">(</span><span class="p" data-group-id="7133171792-5">[</span><span class="mf">0.6934</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.7239</span><span class="p">,</span><span class="w">  </span><span class="mf">1.1954</span><span class="p" data-group-id="7133171792-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7133171792-6">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7133171792-6">}</span><span class="p" data-group-id="7133171792-4">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7133171792-7">(</span><span class="p" data-group-id="7133171792-8">[</span><span class="o">-</span><span class="mf">0.4691</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2670</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.7452</span><span class="p" data-group-id="7133171792-8">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7133171792-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7133171792-9">}</span><span class="p" data-group-id="7133171792-7">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">margin_ranking</span><span class="p" data-group-id="7133171792-10">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7133171792-11">{</span><span class="n">y_pred1</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred2</span><span class="p" data-group-id="7133171792-11">}</span><span class="p" data-group-id="7133171792-10">)</span><span class="w">
+</span><span class="p" data-group-id="7133171792-12">#</span><span class="nc" data-group-id="7133171792-12">Nx.Tensor</span><span class="p" data-group-id="7133171792-12">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="7133171792-13">[</span><span class="mi">3</span><span class="p" data-group-id="7133171792-13">]</span><span class="w">
+  </span><span class="p" data-group-id="7133171792-14">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9909000396728516</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="7133171792-14">]</span><span class="w">
+</span><span class="p" data-group-id="7133171792-12">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7133171792-15">(</span><span class="p" data-group-id="7133171792-16">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="7133171792-16">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7133171792-17">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7133171792-17">}</span><span class="p" data-group-id="7133171792-15">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7133171792-18">(</span><span class="p" data-group-id="7133171792-19">[</span><span class="mf">0.6934</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.7239</span><span class="p">,</span><span class="w">  </span><span class="mf">1.1954</span><span class="p" data-group-id="7133171792-19">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7133171792-20">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7133171792-20">}</span><span class="p" data-group-id="7133171792-18">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7133171792-21">(</span><span class="p" data-group-id="7133171792-22">[</span><span class="o">-</span><span class="mf">0.4691</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2670</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.7452</span><span class="p" data-group-id="7133171792-22">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7133171792-23">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7133171792-23">}</span><span class="p" data-group-id="7133171792-21">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">margin_ranking</span><span class="p" data-group-id="7133171792-24">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7133171792-25">{</span><span class="n">y_pred1</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred2</span><span class="p" data-group-id="7133171792-25">}</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="7133171792-24">)</span><span class="w">
+</span><span class="p" data-group-id="7133171792-26">#</span><span class="nc" data-group-id="7133171792-26">Nx.Tensor</span><span class="p" data-group-id="7133171792-26">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.3303000032901764</span><span class="w">
+</span><span class="p" data-group-id="7133171792-26">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7133171792-27">(</span><span class="p" data-group-id="7133171792-28">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="7133171792-28">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7133171792-29">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7133171792-29">}</span><span class="p" data-group-id="7133171792-27">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7133171792-30">(</span><span class="p" data-group-id="7133171792-31">[</span><span class="mf">0.6934</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.7239</span><span class="p">,</span><span class="w">  </span><span class="mf">1.1954</span><span class="p" data-group-id="7133171792-31">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7133171792-32">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7133171792-32">}</span><span class="p" data-group-id="7133171792-30">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7133171792-33">(</span><span class="p" data-group-id="7133171792-34">[</span><span class="o">-</span><span class="mf">0.4691</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2670</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.7452</span><span class="p" data-group-id="7133171792-34">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7133171792-35">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7133171792-35">}</span><span class="p" data-group-id="7133171792-33">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">margin_ranking</span><span class="p" data-group-id="7133171792-36">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7133171792-37">{</span><span class="n">y_pred1</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred2</span><span class="p" data-group-id="7133171792-37">}</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="7133171792-36">)</span><span class="w">
+</span><span class="p" data-group-id="7133171792-38">#</span><span class="nc" data-group-id="7133171792-38">Nx.Tensor</span><span class="p" data-group-id="7133171792-38">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.9909000396728516</span><span class="w">
+</span><span class="p" data-group-id="7133171792-38">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="mean_absolute_error/3">
+
+    <span id="mean_absolute_error/2"></span>
+
+  <div class="detail-header">
+    <a href="#mean_absolute_error/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">mean_absolute_error(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Mean-absolute error loss function.</p><p>$$l_i = \sum_i |\hat{y_i} - y_i|$$</p><h2 id="mean_absolute_error/3-argument-shapes" class="section-heading">
+  <a href="#mean_absolute_error/3-argument-shapes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Argument Shapes
+</h2>
+<ul><li><code class="inline">y_true</code> - $(d_0, d_1, ..., d_n)$</li><li><code class="inline">y_pred</code> - $(d_0, d_1, ..., d_n)$</li></ul><h2 id="mean_absolute_error/3-options" class="section-heading">
+  <a href="#mean_absolute_error/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="mean_absolute_error/3-examples" class="section-heading">
+  <a href="#mean_absolute_error/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4272646320-1">(</span><span class="p" data-group-id="4272646320-2">[</span><span class="p" data-group-id="4272646320-3">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4272646320-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4272646320-4">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4272646320-4">]</span><span class="p" data-group-id="4272646320-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4272646320-5">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4272646320-5">}</span><span class="p" data-group-id="4272646320-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4272646320-6">(</span><span class="p" data-group-id="4272646320-7">[</span><span class="p" data-group-id="4272646320-8">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4272646320-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4272646320-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4272646320-9">]</span><span class="p" data-group-id="4272646320-7">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4272646320-10">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4272646320-10">}</span><span class="p" data-group-id="4272646320-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">mean_absolute_error</span><span class="p" data-group-id="4272646320-11">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="4272646320-11">)</span><span class="w">
+</span><span class="p" data-group-id="4272646320-12">#</span><span class="nc" data-group-id="4272646320-12">Nx.Tensor</span><span class="p" data-group-id="4272646320-12">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="4272646320-13">[</span><span class="mi">2</span><span class="p" data-group-id="4272646320-13">]</span><span class="w">
+  </span><span class="p" data-group-id="4272646320-14">[</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p" data-group-id="4272646320-14">]</span><span class="w">
+</span><span class="p" data-group-id="4272646320-12">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4272646320-15">(</span><span class="p" data-group-id="4272646320-16">[</span><span class="p" data-group-id="4272646320-17">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4272646320-17">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4272646320-18">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4272646320-18">]</span><span class="p" data-group-id="4272646320-16">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4272646320-19">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4272646320-19">}</span><span class="p" data-group-id="4272646320-15">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4272646320-20">(</span><span class="p" data-group-id="4272646320-21">[</span><span class="p" data-group-id="4272646320-22">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4272646320-22">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4272646320-23">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4272646320-23">]</span><span class="p" data-group-id="4272646320-21">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4272646320-24">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4272646320-24">}</span><span class="p" data-group-id="4272646320-20">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">mean_absolute_error</span><span class="p" data-group-id="4272646320-25">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="4272646320-25">)</span><span class="w">
+</span><span class="p" data-group-id="4272646320-26">#</span><span class="nc" data-group-id="4272646320-26">Nx.Tensor</span><span class="p" data-group-id="4272646320-26">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.5</span><span class="w">
+</span><span class="p" data-group-id="4272646320-26">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4272646320-27">(</span><span class="p" data-group-id="4272646320-28">[</span><span class="p" data-group-id="4272646320-29">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4272646320-29">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4272646320-30">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4272646320-30">]</span><span class="p" data-group-id="4272646320-28">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4272646320-31">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4272646320-31">}</span><span class="p" data-group-id="4272646320-27">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4272646320-32">(</span><span class="p" data-group-id="4272646320-33">[</span><span class="p" data-group-id="4272646320-34">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4272646320-34">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4272646320-35">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4272646320-35">]</span><span class="p" data-group-id="4272646320-33">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4272646320-36">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4272646320-36">}</span><span class="p" data-group-id="4272646320-32">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">mean_absolute_error</span><span class="p" data-group-id="4272646320-37">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="4272646320-37">)</span><span class="w">
+</span><span class="p" data-group-id="4272646320-38">#</span><span class="nc" data-group-id="4272646320-38">Nx.Tensor</span><span class="p" data-group-id="4272646320-38">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">1.0</span><span class="w">
+</span><span class="p" data-group-id="4272646320-38">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="mean_squared_error/3">
+
+    <span id="mean_squared_error/2"></span>
+
+  <div class="detail-header">
+    <a href="#mean_squared_error/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">mean_squared_error(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Mean-squared error loss function.</p><p>$$l_i = \sum_i (\hat{y_i} - y_i)^2$$</p><h2 id="mean_squared_error/3-argument-shapes" class="section-heading">
+  <a href="#mean_squared_error/3-argument-shapes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Argument Shapes
+</h2>
+<ul><li><code class="inline">y_true</code> - $(d_0, d_1, ..., d_n)$</li><li><code class="inline">y_pred</code> - $(d_0, d_1, ..., d_n)$</li></ul><h2 id="mean_squared_error/3-options" class="section-heading">
+  <a href="#mean_squared_error/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="mean_squared_error/3-examples" class="section-heading">
+  <a href="#mean_squared_error/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4262936022-1">(</span><span class="p" data-group-id="4262936022-2">[</span><span class="p" data-group-id="4262936022-3">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4262936022-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4262936022-4">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4262936022-4">]</span><span class="p" data-group-id="4262936022-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4262936022-5">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4262936022-5">}</span><span class="p" data-group-id="4262936022-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4262936022-6">(</span><span class="p" data-group-id="4262936022-7">[</span><span class="p" data-group-id="4262936022-8">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4262936022-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4262936022-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4262936022-9">]</span><span class="p" data-group-id="4262936022-7">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4262936022-10">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4262936022-10">}</span><span class="p" data-group-id="4262936022-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p" data-group-id="4262936022-11">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="4262936022-11">)</span><span class="w">
+</span><span class="p" data-group-id="4262936022-12">#</span><span class="nc" data-group-id="4262936022-12">Nx.Tensor</span><span class="p" data-group-id="4262936022-12">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="4262936022-13">[</span><span class="mi">2</span><span class="p" data-group-id="4262936022-13">]</span><span class="w">
+  </span><span class="p" data-group-id="4262936022-14">[</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p" data-group-id="4262936022-14">]</span><span class="w">
+</span><span class="p" data-group-id="4262936022-12">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4262936022-15">(</span><span class="p" data-group-id="4262936022-16">[</span><span class="p" data-group-id="4262936022-17">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4262936022-17">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4262936022-18">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4262936022-18">]</span><span class="p" data-group-id="4262936022-16">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4262936022-19">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4262936022-19">}</span><span class="p" data-group-id="4262936022-15">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4262936022-20">(</span><span class="p" data-group-id="4262936022-21">[</span><span class="p" data-group-id="4262936022-22">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4262936022-22">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4262936022-23">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4262936022-23">]</span><span class="p" data-group-id="4262936022-21">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4262936022-24">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4262936022-24">}</span><span class="p" data-group-id="4262936022-20">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p" data-group-id="4262936022-25">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="4262936022-25">)</span><span class="w">
+</span><span class="p" data-group-id="4262936022-26">#</span><span class="nc" data-group-id="4262936022-26">Nx.Tensor</span><span class="p" data-group-id="4262936022-26">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.5</span><span class="w">
+</span><span class="p" data-group-id="4262936022-26">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4262936022-27">(</span><span class="p" data-group-id="4262936022-28">[</span><span class="p" data-group-id="4262936022-29">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4262936022-29">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4262936022-30">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4262936022-30">]</span><span class="p" data-group-id="4262936022-28">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4262936022-31">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4262936022-31">}</span><span class="p" data-group-id="4262936022-27">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="4262936022-32">(</span><span class="p" data-group-id="4262936022-33">[</span><span class="p" data-group-id="4262936022-34">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4262936022-34">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4262936022-35">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4262936022-35">]</span><span class="p" data-group-id="4262936022-33">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4262936022-36">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4262936022-36">}</span><span class="p" data-group-id="4262936022-32">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">mean_squared_error</span><span class="p" data-group-id="4262936022-37">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="4262936022-37">)</span><span class="w">
+</span><span class="p" data-group-id="4262936022-38">#</span><span class="nc" data-group-id="4262936022-38">Nx.Tensor</span><span class="p" data-group-id="4262936022-38">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">1.0</span><span class="w">
+</span><span class="p" data-group-id="4262936022-38">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="poisson/3">
+
+    <span id="poisson/2"></span>
+
+  <div class="detail-header">
+    <a href="#poisson/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">poisson(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Poisson loss function.</p><p>$$l_i = \frac{1}{C} \sum_i^C y_i - (\hat{y_i} \cdot \log(y_i))$$</p><h2 id="poisson/3-argument-shapes" class="section-heading">
+  <a href="#poisson/3-argument-shapes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Argument Shapes
+</h2>
+<ul><li><code class="inline">y_true</code> - $(d_0, d_1, ..., d_n)$</li><li><code class="inline">y_pred</code> - $(d_0, d_1, ..., d_n)$</li></ul><h2 id="poisson/3-options" class="section-heading">
+  <a href="#poisson/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="poisson/3-examples" class="section-heading">
+  <a href="#poisson/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1685460567-1">(</span><span class="p" data-group-id="1685460567-2">[</span><span class="p" data-group-id="1685460567-3">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="1685460567-3">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1685460567-4">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="1685460567-4">]</span><span class="p" data-group-id="1685460567-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1685460567-5">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="1685460567-5">}</span><span class="p" data-group-id="1685460567-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1685460567-6">(</span><span class="p" data-group-id="1685460567-7">[</span><span class="p" data-group-id="1685460567-8">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="1685460567-8">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1685460567-9">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="1685460567-9">]</span><span class="p" data-group-id="1685460567-7">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1685460567-10">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="1685460567-10">}</span><span class="p" data-group-id="1685460567-6">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">poisson</span><span class="p" data-group-id="1685460567-11">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="1685460567-11">)</span><span class="w">
+</span><span class="p" data-group-id="1685460567-12">#</span><span class="nc" data-group-id="1685460567-12">Nx.Tensor</span><span class="p" data-group-id="1685460567-12">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="1685460567-13">[</span><span class="mi">2</span><span class="p" data-group-id="1685460567-13">]</span><span class="w">
+  </span><span class="p" data-group-id="1685460567-14">[</span><span class="mf">0.9999999403953552</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="1685460567-14">]</span><span class="w">
+</span><span class="p" data-group-id="1685460567-12">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1685460567-15">(</span><span class="p" data-group-id="1685460567-16">[</span><span class="p" data-group-id="1685460567-17">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="1685460567-17">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1685460567-18">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="1685460567-18">]</span><span class="p" data-group-id="1685460567-16">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1685460567-19">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="1685460567-19">}</span><span class="p" data-group-id="1685460567-15">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1685460567-20">(</span><span class="p" data-group-id="1685460567-21">[</span><span class="p" data-group-id="1685460567-22">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="1685460567-22">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1685460567-23">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="1685460567-23">]</span><span class="p" data-group-id="1685460567-21">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1685460567-24">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="1685460567-24">}</span><span class="p" data-group-id="1685460567-20">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">poisson</span><span class="p" data-group-id="1685460567-25">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="1685460567-25">)</span><span class="w">
+</span><span class="p" data-group-id="1685460567-26">#</span><span class="nc" data-group-id="1685460567-26">Nx.Tensor</span><span class="p" data-group-id="1685460567-26">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.4999999701976776</span><span class="w">
+</span><span class="p" data-group-id="1685460567-26">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1685460567-27">(</span><span class="p" data-group-id="1685460567-28">[</span><span class="p" data-group-id="1685460567-29">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="1685460567-29">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1685460567-30">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="1685460567-30">]</span><span class="p" data-group-id="1685460567-28">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1685460567-31">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="1685460567-31">}</span><span class="p" data-group-id="1685460567-27">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1685460567-32">(</span><span class="p" data-group-id="1685460567-33">[</span><span class="p" data-group-id="1685460567-34">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="1685460567-34">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1685460567-35">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="1685460567-35">]</span><span class="p" data-group-id="1685460567-33">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1685460567-36">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="1685460567-36">}</span><span class="p" data-group-id="1685460567-32">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">poisson</span><span class="p" data-group-id="1685460567-37">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="1685460567-37">)</span><span class="w">
+</span><span class="p" data-group-id="1685460567-38">#</span><span class="nc" data-group-id="1685460567-38">Nx.Tensor</span><span class="p" data-group-id="1685460567-38">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.9999999403953552</span><span class="w">
+</span><span class="p" data-group-id="1685460567-38">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="soft_margin/3">
+
+    <span id="soft_margin/2"></span>
+
+  <div class="detail-header">
+    <a href="#soft_margin/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">soft_margin(y_true, y_pred, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/losses.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Soft margin loss function.</p><p>$$l_i = \sum_i \frac{\log(1 + e^{-\hat{y_i} * y_i})}{N}$$</p><h2 id="soft_margin/3-options" class="section-heading">
+  <a href="#soft_margin/3-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:reduction</code> - reduction mode. One of <code class="inline">:mean</code>, <code class="inline">:sum</code>, or <code class="inline">:none</code>.
+Defaults to <code class="inline">:none</code>.</li></ul><h2 id="soft_margin/3-examples" class="section-heading">
+  <a href="#soft_margin/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8186085922-1">(</span><span class="p" data-group-id="8186085922-2">[</span><span class="p" data-group-id="8186085922-3">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">  </span><span class="mf">1.0</span><span class="p" data-group-id="8186085922-3">]</span><span class="p" data-group-id="8186085922-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8186085922-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8186085922-4">}</span><span class="p" data-group-id="8186085922-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8186085922-5">(</span><span class="p" data-group-id="8186085922-6">[</span><span class="p" data-group-id="8186085922-7">[</span><span class="mf">0.2953</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.1709</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9486</span><span class="p" data-group-id="8186085922-7">]</span><span class="p" data-group-id="8186085922-6">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8186085922-8">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8186085922-8">}</span><span class="p" data-group-id="8186085922-5">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">soft_margin</span><span class="p" data-group-id="8186085922-9">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p" data-group-id="8186085922-9">)</span><span class="w">
+</span><span class="p" data-group-id="8186085922-10">#</span><span class="nc" data-group-id="8186085922-10">Nx.Tensor</span><span class="p" data-group-id="8186085922-10">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="8186085922-11">[</span><span class="mi">3</span><span class="p" data-group-id="8186085922-11">]</span><span class="w">
+  </span><span class="p" data-group-id="8186085922-12">[</span><span class="mf">0.851658046245575</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7822436094284058</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3273470401763916</span><span class="p" data-group-id="8186085922-12">]</span><span class="w">
+</span><span class="p" data-group-id="8186085922-10">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8186085922-13">(</span><span class="p" data-group-id="8186085922-14">[</span><span class="p" data-group-id="8186085922-15">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">  </span><span class="mf">1.0</span><span class="p" data-group-id="8186085922-15">]</span><span class="p" data-group-id="8186085922-14">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8186085922-16">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8186085922-16">}</span><span class="p" data-group-id="8186085922-13">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8186085922-17">(</span><span class="p" data-group-id="8186085922-18">[</span><span class="p" data-group-id="8186085922-19">[</span><span class="mf">0.2953</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.1709</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9486</span><span class="p" data-group-id="8186085922-19">]</span><span class="p" data-group-id="8186085922-18">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8186085922-20">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8186085922-20">}</span><span class="p" data-group-id="8186085922-17">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">soft_margin</span><span class="p" data-group-id="8186085922-21">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:mean</span><span class="p" data-group-id="8186085922-21">)</span><span class="w">
+</span><span class="p" data-group-id="8186085922-22">#</span><span class="nc" data-group-id="8186085922-22">Nx.Tensor</span><span class="p" data-group-id="8186085922-22">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">0.6537495255470276</span><span class="w">
+</span><span class="p" data-group-id="8186085922-22">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8186085922-23">(</span><span class="p" data-group-id="8186085922-24">[</span><span class="p" data-group-id="8186085922-25">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">  </span><span class="mf">1.0</span><span class="p" data-group-id="8186085922-25">]</span><span class="p" data-group-id="8186085922-24">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8186085922-26">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8186085922-26">}</span><span class="p" data-group-id="8186085922-23">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">y_pred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8186085922-27">(</span><span class="p" data-group-id="8186085922-28">[</span><span class="p" data-group-id="8186085922-29">[</span><span class="mf">0.2953</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.1709</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9486</span><span class="p" data-group-id="8186085922-29">]</span><span class="p" data-group-id="8186085922-28">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8186085922-30">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8186085922-30">}</span><span class="p" data-group-id="8186085922-27">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Losses</span><span class="o">.</span><span class="n">soft_margin</span><span class="p" data-group-id="8186085922-31">(</span><span class="n">y_true</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">,</span><span class="w"> </span><span class="ss">reduction</span><span class="p">:</span><span class="w"> </span><span class="ss">:sum</span><span class="p" data-group-id="8186085922-31">)</span><span class="w">
+</span><span class="p" data-group-id="8186085922-32">#</span><span class="nc" data-group-id="8186085922-32">Nx.Tensor</span><span class="p" data-group-id="8186085922-32">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="w">
+  </span><span class="mf">1.9612486362457275</span><span class="w">
+</span><span class="p" data-group-id="8186085922-32">&gt;</span></code></pre>
+  </section>
+</section>
+
+          </div>
+        </section>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.25.3) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.css" integrity="sha384-t5CR+zwDAROtph0PXGte6ia8heboACF9R5l/DiY+WZ3P2lxNgvJkQk5n7GPvLMYw" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.js" integrity="sha384-FaFLTlohFghEIZkw6VGwmf9ISTubWAVYW8tG8+w2LAIftJEULZABrF9PPFv+tVkH" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/contrib/auto-render.min.js" integrity="sha384-bHBqxz8fokvgoJ/sc17HODNxa42TlaEhB+w8ZJXTc2nZf1VgEaFZeZvT4Mznfz0v" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+  </body>
+</html>

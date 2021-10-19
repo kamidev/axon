@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.25.3">
+    <meta name="project" content="Axon v0.1.0-dev">
+
+    <title>Axon.Activations — Axon v0.1.0-dev</title>
+    <link rel="stylesheet" href="dist/elixir-37545fd2f35b96531434.css" />
+
+    <script src="dist/sidebar_items-61fb6dad2a.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-e5e774c81fa6257aba7f.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="Axon.html" class="sidebar-projectName">
+Axon
+      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.0-dev
+      </strong>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+Axon.Activations <small class="app-vsn">(Axon v0.1.0-dev)</small>
+
+          <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+
+      </h1>
+
+
+        <section id="moduledoc">
+<p>Activation functions.</p><p>Activation functions are element-wise, (typically) non-linear
+functions called on the output of another layer, such as
+a dense layer:</p><pre><code class="makeup elixir"><span class="n">x</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">dense</span><span class="p" data-group-id="9628834844-1">(</span><span class="n">weight</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p" data-group-id="9628834844-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">relu</span><span class="p" data-group-id="9628834844-2">(</span><span class="p" data-group-id="9628834844-2">)</span></code></pre><p>Activation functions output the &quot;activation&quot; or how active
+a given layer's neurons are in learning a representation
+of the data-generating distribution.</p><p>Some activations are commonly used as output activations. For
+example <code class="inline">softmax</code> is often used as the output in multiclass
+classification problems because it returns a categorical
+probability distribution:</p><pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">softmax</span><span class="p" data-group-id="8389116547-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8389116547-2">(</span><span class="p" data-group-id="8389116547-3">[</span><span class="p" data-group-id="8389116547-4">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="8389116547-4">]</span><span class="p" data-group-id="8389116547-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8389116547-5">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8389116547-5">}</span><span class="p" data-group-id="8389116547-2">)</span><span class="p" data-group-id="8389116547-1">)</span><span class="w">
+</span><span class="p" data-group-id="8389116547-6">#</span><span class="nc" data-group-id="8389116547-6">Nx.Tensor</span><span class="p" data-group-id="8389116547-6">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="8389116547-7">[</span><span class="mi">1</span><span class="p" data-group-id="8389116547-7">]</span><span class="p" data-group-id="8389116547-8">[</span><span class="mi">3</span><span class="p" data-group-id="8389116547-8">]</span><span class="w">
+  </span><span class="p" data-group-id="8389116547-9">[</span><span class="w">
+    </span><span class="p" data-group-id="8389116547-10">[</span><span class="mf">0.09003057330846786</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2447284758090973</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6652409434318542</span><span class="p" data-group-id="8389116547-10">]</span><span class="w">
+  </span><span class="p" data-group-id="8389116547-9">]</span><span class="w">
+</span><span class="p" data-group-id="8389116547-6">&gt;</span></code></pre><p>Other activations such as <code class="inline">tanh</code> or <code class="inline">sigmoid</code> are used because
+they have desirable properties, such as keeping the output
+tensor constrained within a certain range.</p><p>Generally, the choice of activation function is arbitrary;
+although some activations work better than others in certain
+problem domains. For example ReLU (rectified linear unit)
+activation is a widely-accepted default. You can see
+a list of activation functions and implementations
+<a href="https://paperswithcode.com/methods/category/activation-functions">here</a>.</p><p>All of the functions in this module are implemented as
+numerical functions and can be JIT or AOT compiled with
+any supported <a href="https://hexdocs.pm/nx/0.1.0-dev/Nx.html"><code class="inline">Nx</code></a> compiler.</p>
+        </section>
+
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#celu/2">celu(x, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Continuously-differentiable exponential linear unit activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#elu/2">elu(x, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Exponential linear unit activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#exp/1">exp(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Exponential activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#gelu/1">gelu(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Gaussian error linear unit activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#hard_sigmoid/1">hard_sigmoid(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Hard sigmoid activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#hard_silu/1">hard_silu(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Hard sigmoid weighted linear unit activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#hard_tanh/1">hard_tanh(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Hard hyperbolic tangent activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#leaky_relu/2">leaky_relu(x, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Leaky rectified linear unit activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#linear/1">linear(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Linear activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#log_sigmoid/1">log_sigmoid(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Log-sigmoid activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#mish/1">mish(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Mish activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#relu/1">relu(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Rectified linear unit activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#relu6/1">relu6(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Rectified linear unit 6 activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#selu/1">selu(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Scaled exponential linear unit activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#sigmoid/1">sigmoid(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Sigmoid activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#silu/1">silu(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Sigmoid weighted linear unit activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#softmax/2">softmax(x, opts \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Softmax activation along an axis.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#softplus/1">softplus(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Softplus activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#softsign/1">softsign(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Softsign activation.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#tanh/1">tanh(x)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Hyperbolic tangent activation.</p></div>
+
+</div>
+
+  </div>
+
+        </section>
+
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions
+          </h1>
+          <div class="functions-list">
+<section class="detail" id="celu/2">
+
+    <span id="celu/1"></span>
+
+  <div class="detail-header">
+    <a href="#celu/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">celu(x, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Continuously-differentiable exponential linear unit activation.</p><p>$$f(x_i) = \max(0, x_i) + \min(0, \alpha * e^{\frac{x_i}{\alpha}} - 1)$$</p><h2 id="celu/2-options" class="section-heading">
+  <a href="#celu/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">alpha</code> - $\alpha$ in CELU formulation. Must be non-zero.
+Defaults to <code class="inline">1.0</code></li></ul><h2 id="celu/2-examples" class="section-heading">
+  <a href="#celu/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">celu</span><span class="p" data-group-id="8407589203-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8407589203-2">(</span><span class="p" data-group-id="8407589203-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="8407589203-3">]</span><span class="p" data-group-id="8407589203-2">)</span><span class="p" data-group-id="8407589203-1">)</span><span class="w">
+</span><span class="p" data-group-id="8407589203-4">#</span><span class="nc" data-group-id="8407589203-4">Nx.Tensor</span><span class="p" data-group-id="8407589203-4">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="8407589203-5">[</span><span class="mi">7</span><span class="p" data-group-id="8407589203-5">]</span><span class="w">
+  </span><span class="p" data-group-id="8407589203-6">[</span><span class="o">-</span><span class="mf">0.9502129554748535</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.8646647334098816</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.6321205496788025</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="8407589203-6">]</span><span class="w">
+</span><span class="p" data-group-id="8407589203-4">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">celu</span><span class="p" data-group-id="8407589203-7">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8407589203-8">(</span><span class="p" data-group-id="8407589203-9">[</span><span class="p" data-group-id="8407589203-10">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="8407589203-10">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8407589203-11">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="8407589203-11">]</span><span class="p" data-group-id="8407589203-9">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8407589203-12">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="8407589203-12">}</span><span class="p" data-group-id="8407589203-8">)</span><span class="p" data-group-id="8407589203-7">)</span><span class="w">
+</span><span class="p" data-group-id="8407589203-13">#</span><span class="nc" data-group-id="8407589203-13">Nx.Tensor</span><span class="p" data-group-id="8407589203-13">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="8407589203-14">[</span><span class="mi">2</span><span class="p" data-group-id="8407589203-14">]</span><span class="p" data-group-id="8407589203-15">[</span><span class="mi">3</span><span class="p" data-group-id="8407589203-15">]</span><span class="w">
+  </span><span class="p" data-group-id="8407589203-16">[</span><span class="w">
+    </span><span class="p" data-group-id="8407589203-17">[</span><span class="o">-</span><span class="mf">0.62890625</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.86328125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.94921875</span><span class="p" data-group-id="8407589203-17">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="8407589203-18">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="8407589203-18">]</span><span class="w">
+  </span><span class="p" data-group-id="8407589203-16">]</span><span class="w">
+</span><span class="p" data-group-id="8407589203-13">&gt;</span></code></pre><h3 id="celu/2-error-cases" class="section-heading">
+  <a href="#celu/2-error-cases" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Error cases
+</h3>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">celu</span><span class="p" data-group-id="8492681861-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8492681861-2">(</span><span class="p" data-group-id="8492681861-3">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p" data-group-id="8492681861-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8492681861-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8492681861-4">}</span><span class="p" data-group-id="8492681861-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">alpha</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="8492681861-1">)</span><span class="w">
+</span><span class="gt">** (ArgumentError) :alpha must be non-zero in CELU activation</span></code></pre><h2 id="celu/2-references" class="section-heading">
+  <a href="#celu/2-references" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  References
+</h2>
+<ul><li><a href="https://arxiv.org/pdf/1704.07483.pdf">Continuously Differentiable Exponential Linear Units</a></li></ul>
+  </section>
+</section>
+<section class="detail" id="elu/2">
+
+    <span id="elu/1"></span>
+
+  <div class="detail-header">
+    <a href="#elu/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">elu(x, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Exponential linear unit activation.</p><p>Equivalent to <code class="inline">celu</code> for $\alpha = 1$</p><p>$$f(x_i) = \begin{cases}x_i &amp; x _i &gt; 0 \newline \alpha * (e^{x_i} - 1) &amp; x_i \leq 0 \ \end{cases}$$</p><h2 id="elu/2-options" class="section-heading">
+  <a href="#elu/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">alpha</code> - $\alpha$ in ELU formulation. Defaults to <code class="inline">1.0</code></li></ul><h2 id="elu/2-examples" class="section-heading">
+  <a href="#elu/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">elu</span><span class="p" data-group-id="8440464502-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8440464502-2">(</span><span class="p" data-group-id="8440464502-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="8440464502-3">]</span><span class="p" data-group-id="8440464502-2">)</span><span class="p" data-group-id="8440464502-1">)</span><span class="w">
+</span><span class="p" data-group-id="8440464502-4">#</span><span class="nc" data-group-id="8440464502-4">Nx.Tensor</span><span class="p" data-group-id="8440464502-4">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="8440464502-5">[</span><span class="mi">7</span><span class="p" data-group-id="8440464502-5">]</span><span class="w">
+  </span><span class="p" data-group-id="8440464502-6">[</span><span class="o">-</span><span class="mf">0.9502129554748535</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.8646647334098816</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.6321205496788025</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="8440464502-6">]</span><span class="w">
+</span><span class="p" data-group-id="8440464502-4">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">elu</span><span class="p" data-group-id="8440464502-7">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="8440464502-8">(</span><span class="p" data-group-id="8440464502-9">[</span><span class="p" data-group-id="8440464502-10">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="8440464502-10">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8440464502-11">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="8440464502-11">]</span><span class="p" data-group-id="8440464502-9">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8440464502-12">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="8440464502-12">}</span><span class="p" data-group-id="8440464502-8">)</span><span class="p" data-group-id="8440464502-7">)</span><span class="w">
+</span><span class="p" data-group-id="8440464502-13">#</span><span class="nc" data-group-id="8440464502-13">Nx.Tensor</span><span class="p" data-group-id="8440464502-13">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="8440464502-14">[</span><span class="mi">2</span><span class="p" data-group-id="8440464502-14">]</span><span class="p" data-group-id="8440464502-15">[</span><span class="mi">3</span><span class="p" data-group-id="8440464502-15">]</span><span class="w">
+  </span><span class="p" data-group-id="8440464502-16">[</span><span class="w">
+    </span><span class="p" data-group-id="8440464502-17">[</span><span class="o">-</span><span class="mf">0.62890625</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.86328125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.94921875</span><span class="p" data-group-id="8440464502-17">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="8440464502-18">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="8440464502-18">]</span><span class="w">
+  </span><span class="p" data-group-id="8440464502-16">]</span><span class="w">
+</span><span class="p" data-group-id="8440464502-13">&gt;</span></code></pre><h2 id="elu/2-references" class="section-heading">
+  <a href="#elu/2-references" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  References
+</h2>
+<ul><li><a href="https://arxiv.org/abs/1511.07289">Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)</a></li></ul>
+  </section>
+</section>
+<section class="detail" id="exp/1">
+
+  <div class="detail-header">
+    <a href="#exp/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">exp(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Exponential activation.</p><p>$$f(x_i) = e^{x_i}$$</p><h2 id="exp/1-examples" class="section-heading">
+  <a href="#exp/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">exp</span><span class="p" data-group-id="6199822322-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6199822322-2">(</span><span class="p" data-group-id="6199822322-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="6199822322-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6199822322-4">[</span><span class="ss">:data</span><span class="p" data-group-id="6199822322-4">]</span><span class="p" data-group-id="6199822322-2">)</span><span class="p" data-group-id="6199822322-1">)</span><span class="w">
+</span><span class="p" data-group-id="6199822322-5">#</span><span class="nc" data-group-id="6199822322-5">Nx.Tensor</span><span class="p" data-group-id="6199822322-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="6199822322-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="6199822322-6">]</span><span class="w">
+  </span><span class="p" data-group-id="6199822322-7">[</span><span class="mf">0.049787066876888275</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1353352814912796</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3678794503211975</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.7182817459106445</span><span class="p">,</span><span class="w"> </span><span class="mf">7.389056205749512</span><span class="p">,</span><span class="w"> </span><span class="mf">20.08553695678711</span><span class="p" data-group-id="6199822322-7">]</span><span class="w">
+</span><span class="p" data-group-id="6199822322-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">exp</span><span class="p" data-group-id="6199822322-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6199822322-9">(</span><span class="p" data-group-id="6199822322-10">[</span><span class="p" data-group-id="6199822322-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="6199822322-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6199822322-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="6199822322-12">]</span><span class="p" data-group-id="6199822322-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6199822322-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="6199822322-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6199822322-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="6199822322-14">]</span><span class="p" data-group-id="6199822322-9">)</span><span class="p" data-group-id="6199822322-8">)</span><span class="w">
+</span><span class="p" data-group-id="6199822322-15">#</span><span class="nc" data-group-id="6199822322-15">Nx.Tensor</span><span class="p" data-group-id="6199822322-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="6199822322-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6199822322-16">]</span><span class="p" data-group-id="6199822322-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="6199822322-17">]</span><span class="w">
+  </span><span class="p" data-group-id="6199822322-18">[</span><span class="w">
+    </span><span class="p" data-group-id="6199822322-19">[</span><span class="mf">0.3671875</span><span class="p">,</span><span class="w"> </span><span class="mf">0.134765625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.049560546875</span><span class="p" data-group-id="6199822322-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="6199822322-20">[</span><span class="mf">2.703125</span><span class="p">,</span><span class="w"> </span><span class="mf">7.375</span><span class="p">,</span><span class="w"> </span><span class="mf">20.0</span><span class="p" data-group-id="6199822322-20">]</span><span class="w">
+  </span><span class="p" data-group-id="6199822322-18">]</span><span class="w">
+</span><span class="p" data-group-id="6199822322-15">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="gelu/1">
+
+  <div class="detail-header">
+    <a href="#gelu/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">gelu(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Gaussian error linear unit activation.</p><p>$$f(x_i) = \frac{x_i}{2}(1 + {erf}(\frac{x_i}{\sqrt{2}}))$$</p><h2 id="gelu/1-examples" class="section-heading">
+  <a href="#gelu/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">gelu</span><span class="p" data-group-id="5557879130-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5557879130-2">(</span><span class="p" data-group-id="5557879130-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5557879130-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5557879130-4">[</span><span class="ss">:data</span><span class="p" data-group-id="5557879130-4">]</span><span class="p" data-group-id="5557879130-2">)</span><span class="p" data-group-id="5557879130-1">)</span><span class="w">
+</span><span class="p" data-group-id="5557879130-5">#</span><span class="nc" data-group-id="5557879130-5">Nx.Tensor</span><span class="p" data-group-id="5557879130-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="5557879130-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="5557879130-6">]</span><span class="w">
+  </span><span class="p" data-group-id="5557879130-7">[</span><span class="o">-</span><span class="mf">0.0040496885776519775</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.04550027847290039</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.15865525603294373</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8413447141647339</span><span class="p">,</span><span class="w"> </span><span class="mf">1.9544997215270996</span><span class="p">,</span><span class="w"> </span><span class="mf">2.995950222015381</span><span class="p" data-group-id="5557879130-7">]</span><span class="w">
+</span><span class="p" data-group-id="5557879130-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">gelu</span><span class="p" data-group-id="5557879130-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5557879130-9">(</span><span class="p" data-group-id="5557879130-10">[</span><span class="p" data-group-id="5557879130-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="5557879130-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5557879130-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5557879130-12">]</span><span class="p" data-group-id="5557879130-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5557879130-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5557879130-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5557879130-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="5557879130-14">]</span><span class="p" data-group-id="5557879130-9">)</span><span class="p" data-group-id="5557879130-8">)</span><span class="w">
+</span><span class="p" data-group-id="5557879130-15">#</span><span class="nc" data-group-id="5557879130-15">Nx.Tensor</span><span class="p" data-group-id="5557879130-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="5557879130-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5557879130-16">]</span><span class="p" data-group-id="5557879130-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="5557879130-17">]</span><span class="w">
+  </span><span class="p" data-group-id="5557879130-18">[</span><span class="w">
+    </span><span class="p" data-group-id="5557879130-19">[</span><span class="o">-</span><span class="mf">0.16015625</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.046875</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.005859375</span><span class="p" data-group-id="5557879130-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5557879130-20">[</span><span class="mf">0.83984375</span><span class="p">,</span><span class="w"> </span><span class="mf">1.953125</span><span class="p">,</span><span class="w"> </span><span class="mf">2.984375</span><span class="p" data-group-id="5557879130-20">]</span><span class="w">
+  </span><span class="p" data-group-id="5557879130-18">]</span><span class="w">
+</span><span class="p" data-group-id="5557879130-15">&gt;</span></code></pre><h2 id="gelu/1-references" class="section-heading">
+  <a href="#gelu/1-references" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  References
+</h2>
+<ul><li><a href="https://arxiv.org/abs/1606.08415">Gaussian Error Linear Units (GELUs)</a></li></ul>
+  </section>
+</section>
+<section class="detail" id="hard_sigmoid/1">
+
+  <div class="detail-header">
+    <a href="#hard_sigmoid/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">hard_sigmoid(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Hard sigmoid activation.</p><p>$$f(x_i) = \begin{cases} 0 &amp; x_i \leq -3 \newline
+1 &amp; x_i \geq 3 \newline
+\frac{x_i}{6} + \frac{1}{2} &amp; otherwise \end{cases}$$</p><h2 id="hard_sigmoid/1-examples" class="section-heading">
+  <a href="#hard_sigmoid/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">hard_sigmoid</span><span class="p" data-group-id="3548969266-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3548969266-2">(</span><span class="p" data-group-id="3548969266-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3548969266-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3548969266-4">[</span><span class="ss">:data</span><span class="p" data-group-id="3548969266-4">]</span><span class="p" data-group-id="3548969266-2">)</span><span class="p" data-group-id="3548969266-1">)</span><span class="w">
+</span><span class="p" data-group-id="3548969266-5">#</span><span class="nc" data-group-id="3548969266-5">Nx.Tensor</span><span class="p" data-group-id="3548969266-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="3548969266-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="3548969266-6">]</span><span class="w">
+  </span><span class="p" data-group-id="3548969266-7">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1666666716337204</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3333333432674408</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6666666865348816</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8333333134651184</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="3548969266-7">]</span><span class="w">
+</span><span class="p" data-group-id="3548969266-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">hard_sigmoid</span><span class="p" data-group-id="3548969266-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3548969266-9">(</span><span class="p" data-group-id="3548969266-10">[</span><span class="p" data-group-id="3548969266-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="3548969266-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3548969266-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3548969266-12">]</span><span class="p" data-group-id="3548969266-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3548969266-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3548969266-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3548969266-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="3548969266-14">]</span><span class="p" data-group-id="3548969266-9">)</span><span class="p" data-group-id="3548969266-8">)</span><span class="w">
+</span><span class="p" data-group-id="3548969266-15">#</span><span class="nc" data-group-id="3548969266-15">Nx.Tensor</span><span class="p" data-group-id="3548969266-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="3548969266-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3548969266-16">]</span><span class="p" data-group-id="3548969266-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="3548969266-17">]</span><span class="w">
+  </span><span class="p" data-group-id="3548969266-18">[</span><span class="w">
+    </span><span class="p" data-group-id="3548969266-19">[</span><span class="mf">0.33203125</span><span class="p">,</span><span class="w"> </span><span class="mf">0.166015625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="3548969266-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="3548969266-20">[</span><span class="mf">0.6640625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.83203125</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="3548969266-20">]</span><span class="w">
+  </span><span class="p" data-group-id="3548969266-18">]</span><span class="w">
+</span><span class="p" data-group-id="3548969266-15">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="hard_silu/1">
+
+  <div class="detail-header">
+    <a href="#hard_silu/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">hard_silu(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Hard sigmoid weighted linear unit activation.</p><p>$$f(x_i) = \begin{cases} 0 &amp; x_i \leq -3 \newline
+x &amp; x_i \geq 3 \newline
+\frac{x_i^2}{6} + \frac{x_i}{2} &amp; otherwise \end{cases}$$</p><h2 id="hard_silu/1-examples" class="section-heading">
+  <a href="#hard_silu/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">hard_silu</span><span class="p" data-group-id="3044512737-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3044512737-2">(</span><span class="p" data-group-id="3044512737-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3044512737-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3044512737-4">[</span><span class="ss">:data</span><span class="p" data-group-id="3044512737-4">]</span><span class="p" data-group-id="3044512737-2">)</span><span class="p" data-group-id="3044512737-1">)</span><span class="w">
+</span><span class="p" data-group-id="3044512737-5">#</span><span class="nc" data-group-id="3044512737-5">Nx.Tensor</span><span class="p" data-group-id="3044512737-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="3044512737-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="3044512737-6">]</span><span class="w">
+  </span><span class="p" data-group-id="3044512737-7">[</span><span class="o">-</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.3333333432674408</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.3333333432674408</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6666666865348816</span><span class="p">,</span><span class="w"> </span><span class="mf">1.6666666269302368</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3044512737-7">]</span><span class="w">
+</span><span class="p" data-group-id="3044512737-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">hard_silu</span><span class="p" data-group-id="3044512737-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3044512737-9">(</span><span class="p" data-group-id="3044512737-10">[</span><span class="p" data-group-id="3044512737-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="3044512737-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3044512737-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3044512737-12">]</span><span class="p" data-group-id="3044512737-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3044512737-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3044512737-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3044512737-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="3044512737-14">]</span><span class="p" data-group-id="3044512737-9">)</span><span class="p" data-group-id="3044512737-8">)</span><span class="w">
+</span><span class="p" data-group-id="3044512737-15">#</span><span class="nc" data-group-id="3044512737-15">Nx.Tensor</span><span class="p" data-group-id="3044512737-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="3044512737-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3044512737-16">]</span><span class="p" data-group-id="3044512737-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="3044512737-17">]</span><span class="w">
+  </span><span class="p" data-group-id="3044512737-18">[</span><span class="w">
+    </span><span class="p" data-group-id="3044512737-19">[</span><span class="o">-</span><span class="mf">0.33203125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.33203125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.0</span><span class="p" data-group-id="3044512737-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="3044512737-20">[</span><span class="mf">0.6640625</span><span class="p">,</span><span class="w"> </span><span class="mf">1.6640625</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3044512737-20">]</span><span class="w">
+  </span><span class="p" data-group-id="3044512737-18">]</span><span class="w">
+</span><span class="p" data-group-id="3044512737-15">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="hard_tanh/1">
+
+  <div class="detail-header">
+    <a href="#hard_tanh/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">hard_tanh(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Hard hyperbolic tangent activation.</p><p>$$f(x_i) = \begin{cases} 1 &amp; x &gt; 1 \newline -1 &amp; x &lt; -1 \newline x &amp; otherwise \end{cases}$$</p><h2 id="hard_tanh/1-examples" class="section-heading">
+  <a href="#hard_tanh/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">hard_tanh</span><span class="p" data-group-id="5058540300-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5058540300-2">(</span><span class="p" data-group-id="5058540300-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5058540300-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5058540300-4">[</span><span class="ss">:data</span><span class="p" data-group-id="5058540300-4">]</span><span class="p" data-group-id="5058540300-2">)</span><span class="p" data-group-id="5058540300-1">)</span><span class="w">
+</span><span class="p" data-group-id="5058540300-5">#</span><span class="nc" data-group-id="5058540300-5">Nx.Tensor</span><span class="p" data-group-id="5058540300-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="5058540300-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="5058540300-6">]</span><span class="w">
+  </span><span class="p" data-group-id="5058540300-7">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="5058540300-7">]</span><span class="w">
+</span><span class="p" data-group-id="5058540300-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">hard_tanh</span><span class="p" data-group-id="5058540300-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5058540300-9">(</span><span class="p" data-group-id="5058540300-10">[</span><span class="p" data-group-id="5058540300-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="5058540300-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5058540300-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5058540300-12">]</span><span class="p" data-group-id="5058540300-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5058540300-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5058540300-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5058540300-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="5058540300-14">]</span><span class="p" data-group-id="5058540300-9">)</span><span class="p" data-group-id="5058540300-8">)</span><span class="w">
+</span><span class="p" data-group-id="5058540300-15">#</span><span class="nc" data-group-id="5058540300-15">Nx.Tensor</span><span class="p" data-group-id="5058540300-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="5058540300-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5058540300-16">]</span><span class="p" data-group-id="5058540300-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="5058540300-17">]</span><span class="w">
+  </span><span class="p" data-group-id="5058540300-18">[</span><span class="w">
+    </span><span class="p" data-group-id="5058540300-19">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p" data-group-id="5058540300-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5058540300-20">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="5058540300-20">]</span><span class="w">
+  </span><span class="p" data-group-id="5058540300-18">]</span><span class="w">
+</span><span class="p" data-group-id="5058540300-15">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="leaky_relu/2">
+
+    <span id="leaky_relu/1"></span>
+
+  <div class="detail-header">
+    <a href="#leaky_relu/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">leaky_relu(x, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Leaky rectified linear unit activation.</p><p>$$f(x_i) = \begin{cases} x &amp; x \geq 0 \newline \alpha * x &amp; otherwise \end{cases}$$</p><h2 id="leaky_relu/2-options" class="section-heading">
+  <a href="#leaky_relu/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:alpha</code> - $\alpha$ in Leaky ReLU formulation. Defaults to <code class="inline">1.0e-2</code></li></ul><h2 id="leaky_relu/2-examples" class="section-heading">
+  <a href="#leaky_relu/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">leaky_relu</span><span class="p" data-group-id="2530756912-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="2530756912-2">(</span><span class="p" data-group-id="2530756912-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2530756912-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2530756912-4">[</span><span class="ss">:data</span><span class="p" data-group-id="2530756912-4">]</span><span class="p" data-group-id="2530756912-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">alpha</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p" data-group-id="2530756912-1">)</span><span class="w">
+</span><span class="p" data-group-id="2530756912-5">#</span><span class="nc" data-group-id="2530756912-5">Nx.Tensor</span><span class="p" data-group-id="2530756912-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="2530756912-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="2530756912-6">]</span><span class="w">
+  </span><span class="p" data-group-id="2530756912-7">[</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2530756912-7">]</span><span class="w">
+</span><span class="p" data-group-id="2530756912-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">leaky_relu</span><span class="p" data-group-id="2530756912-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="2530756912-9">(</span><span class="p" data-group-id="2530756912-10">[</span><span class="p" data-group-id="2530756912-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="2530756912-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2530756912-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2530756912-12">]</span><span class="p" data-group-id="2530756912-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2530756912-13">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="2530756912-13">]</span><span class="p" data-group-id="2530756912-9">)</span><span class="p">,</span><span class="w"> </span><span class="ss">alpha</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p" data-group-id="2530756912-8">)</span><span class="w">
+</span><span class="p" data-group-id="2530756912-14">#</span><span class="nc" data-group-id="2530756912-14">Nx.Tensor</span><span class="p" data-group-id="2530756912-14">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="2530756912-15">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2530756912-15">]</span><span class="p" data-group-id="2530756912-16">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="2530756912-16">]</span><span class="w">
+  </span><span class="p" data-group-id="2530756912-17">[</span><span class="w">
+    </span><span class="p" data-group-id="2530756912-18">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.5</span><span class="p" data-group-id="2530756912-18">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="2530756912-19">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2530756912-19">]</span><span class="w">
+  </span><span class="p" data-group-id="2530756912-17">]</span><span class="w">
+</span><span class="p" data-group-id="2530756912-14">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="linear/1">
+
+  <div class="detail-header">
+    <a href="#linear/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">linear(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Linear activation.</p><p>$$f(x_i) = x_i$$</p><h2 id="linear/1-examples" class="section-heading">
+  <a href="#linear/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">linear</span><span class="p" data-group-id="5016722888-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5016722888-2">(</span><span class="p" data-group-id="5016722888-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5016722888-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5016722888-4">[</span><span class="ss">:data</span><span class="p" data-group-id="5016722888-4">]</span><span class="p" data-group-id="5016722888-2">)</span><span class="p" data-group-id="5016722888-1">)</span><span class="w">
+</span><span class="p" data-group-id="5016722888-5">#</span><span class="nc" data-group-id="5016722888-5">Nx.Tensor</span><span class="p" data-group-id="5016722888-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="5016722888-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="5016722888-6">]</span><span class="w">
+  </span><span class="p" data-group-id="5016722888-7">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5016722888-7">]</span><span class="w">
+</span><span class="p" data-group-id="5016722888-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">linear</span><span class="p" data-group-id="5016722888-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5016722888-9">(</span><span class="p" data-group-id="5016722888-10">[</span><span class="p" data-group-id="5016722888-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="5016722888-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5016722888-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5016722888-12">]</span><span class="p" data-group-id="5016722888-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5016722888-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5016722888-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5016722888-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="5016722888-14">]</span><span class="p" data-group-id="5016722888-9">)</span><span class="p" data-group-id="5016722888-8">)</span><span class="w">
+</span><span class="p" data-group-id="5016722888-15">#</span><span class="nc" data-group-id="5016722888-15">Nx.Tensor</span><span class="p" data-group-id="5016722888-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="5016722888-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5016722888-16">]</span><span class="p" data-group-id="5016722888-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="5016722888-17">]</span><span class="w">
+  </span><span class="p" data-group-id="5016722888-18">[</span><span class="w">
+    </span><span class="p" data-group-id="5016722888-19">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="5016722888-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5016722888-20">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5016722888-20">]</span><span class="w">
+  </span><span class="p" data-group-id="5016722888-18">]</span><span class="w">
+</span><span class="p" data-group-id="5016722888-15">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="log_sigmoid/1">
+
+  <div class="detail-header">
+    <a href="#log_sigmoid/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">log_sigmoid(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Log-sigmoid activation.</p><p>$$f(x_i) = \log(\sigmoid(x))$$</p><h2 id="log_sigmoid/1-examples" class="section-heading">
+  <a href="#log_sigmoid/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">log_sigmoid</span><span class="p" data-group-id="5429967076-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5429967076-2">(</span><span class="p" data-group-id="5429967076-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5429967076-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5429967076-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5429967076-4">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5429967076-5">[</span><span class="ss">:data</span><span class="p" data-group-id="5429967076-5">]</span><span class="p" data-group-id="5429967076-2">)</span><span class="p" data-group-id="5429967076-1">)</span><span class="w">
+</span><span class="p" data-group-id="5429967076-6">#</span><span class="nc" data-group-id="5429967076-6">Nx.Tensor</span><span class="p" data-group-id="5429967076-6">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="5429967076-7">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="5429967076-7">]</span><span class="w">
+  </span><span class="p" data-group-id="5429967076-8">[</span><span class="o">-</span><span class="mf">3.0485873222351074</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.1269280910491943</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.3132617473602295</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.6931471824645996</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.3132616877555847</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.12692801654338837</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.04858734831213951</span><span class="p" data-group-id="5429967076-8">]</span><span class="w">
+</span><span class="p" data-group-id="5429967076-6">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">log_sigmoid</span><span class="p" data-group-id="5429967076-9">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5429967076-10">(</span><span class="p" data-group-id="5429967076-11">[</span><span class="p" data-group-id="5429967076-12">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="5429967076-12">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5429967076-13">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5429967076-13">]</span><span class="p" data-group-id="5429967076-11">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5429967076-14">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5429967076-14">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5429967076-15">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="5429967076-15">]</span><span class="p" data-group-id="5429967076-10">)</span><span class="p" data-group-id="5429967076-9">)</span><span class="w">
+</span><span class="p" data-group-id="5429967076-16">#</span><span class="nc" data-group-id="5429967076-16">Nx.Tensor</span><span class="p" data-group-id="5429967076-16">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="5429967076-17">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5429967076-17">]</span><span class="p" data-group-id="5429967076-18">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="5429967076-18">]</span><span class="w">
+  </span><span class="p" data-group-id="5429967076-19">[</span><span class="w">
+    </span><span class="p" data-group-id="5429967076-20">[</span><span class="o">-</span><span class="mf">1.3125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.046875</span><span class="p" data-group-id="5429967076-20">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5429967076-21">[</span><span class="o">-</span><span class="mf">0.3125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.1259765625</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.04833984375</span><span class="p" data-group-id="5429967076-21">]</span><span class="w">
+  </span><span class="p" data-group-id="5429967076-19">]</span><span class="w">
+</span><span class="p" data-group-id="5429967076-16">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="mish/1">
+
+  <div class="detail-header">
+    <a href="#mish/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">mish(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Mish activation.</p><p>$$f(x_i) = x_i* \tanh(\log(1 + e^x_i))$$</p><h2 id="mish/1-examples" class="section-heading">
+  <a href="#mish/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">mish</span><span class="p" data-group-id="3971202108-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3971202108-2">(</span><span class="p" data-group-id="3971202108-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3971202108-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3971202108-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3971202108-4">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3971202108-5">[</span><span class="ss">:data</span><span class="p" data-group-id="3971202108-5">]</span><span class="p" data-group-id="3971202108-2">)</span><span class="p" data-group-id="3971202108-1">)</span><span class="w">
+</span><span class="p" data-group-id="3971202108-6">#</span><span class="nc" data-group-id="3971202108-6">Nx.Tensor</span><span class="p" data-group-id="3971202108-6">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="3971202108-7">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="3971202108-7">]</span><span class="w">
+  </span><span class="p" data-group-id="3971202108-8">[</span><span class="o">-</span><span class="mf">0.14564745128154755</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.2525014877319336</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.30340147018432617</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8650984168052673</span><span class="p">,</span><span class="w"> </span><span class="mf">1.9439589977264404</span><span class="p">,</span><span class="w"> </span><span class="mf">2.98653507232666</span><span class="p" data-group-id="3971202108-8">]</span><span class="w">
+</span><span class="p" data-group-id="3971202108-6">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">mish</span><span class="p" data-group-id="3971202108-9">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3971202108-10">(</span><span class="p" data-group-id="3971202108-11">[</span><span class="p" data-group-id="3971202108-12">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="3971202108-12">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3971202108-13">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3971202108-13">]</span><span class="p" data-group-id="3971202108-11">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3971202108-14">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3971202108-14">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3971202108-15">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="3971202108-15">]</span><span class="p" data-group-id="3971202108-10">)</span><span class="p" data-group-id="3971202108-9">)</span><span class="w">
+</span><span class="p" data-group-id="3971202108-16">#</span><span class="nc" data-group-id="3971202108-16">Nx.Tensor</span><span class="p" data-group-id="3971202108-16">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="3971202108-17">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3971202108-17">]</span><span class="p" data-group-id="3971202108-18">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="3971202108-18">]</span><span class="w">
+  </span><span class="p" data-group-id="3971202108-19">[</span><span class="w">
+    </span><span class="p" data-group-id="3971202108-20">[</span><span class="o">-</span><span class="mf">0.30078125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.1435546875</span><span class="p" data-group-id="3971202108-20">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="3971202108-21">[</span><span class="mf">0.86328125</span><span class="p">,</span><span class="w"> </span><span class="mf">1.9375</span><span class="p">,</span><span class="w"> </span><span class="mf">2.96875</span><span class="p" data-group-id="3971202108-21">]</span><span class="w">
+  </span><span class="p" data-group-id="3971202108-19">]</span><span class="w">
+</span><span class="p" data-group-id="3971202108-16">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="relu/1">
+
+  <div class="detail-header">
+    <a href="#relu/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">relu(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Rectified linear unit activation.</p><p>$$f(x_i) = \max_i(x, 0)$$</p><h2 id="relu/1-examples" class="section-heading">
+  <a href="#relu/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">relu</span><span class="p" data-group-id="1117046136-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1117046136-2">(</span><span class="p" data-group-id="1117046136-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="1117046136-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1117046136-4">[</span><span class="ss">:data</span><span class="p" data-group-id="1117046136-4">]</span><span class="p" data-group-id="1117046136-2">)</span><span class="p" data-group-id="1117046136-1">)</span><span class="w">
+</span><span class="p" data-group-id="1117046136-5">#</span><span class="nc" data-group-id="1117046136-5">Nx.Tensor</span><span class="p" data-group-id="1117046136-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="1117046136-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="1117046136-6">]</span><span class="w">
+  </span><span class="p" data-group-id="1117046136-7">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="1117046136-7">]</span><span class="w">
+</span><span class="p" data-group-id="1117046136-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">relu</span><span class="p" data-group-id="1117046136-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="1117046136-9">(</span><span class="p" data-group-id="1117046136-10">[</span><span class="p" data-group-id="1117046136-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="1117046136-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1117046136-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="1117046136-12">]</span><span class="p" data-group-id="1117046136-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1117046136-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="1117046136-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1117046136-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="1117046136-14">]</span><span class="p" data-group-id="1117046136-9">)</span><span class="p" data-group-id="1117046136-8">)</span><span class="w">
+</span><span class="p" data-group-id="1117046136-15">#</span><span class="nc" data-group-id="1117046136-15">Nx.Tensor</span><span class="p" data-group-id="1117046136-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="1117046136-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="1117046136-16">]</span><span class="p" data-group-id="1117046136-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="1117046136-17">]</span><span class="w">
+  </span><span class="p" data-group-id="1117046136-18">[</span><span class="w">
+    </span><span class="p" data-group-id="1117046136-19">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="1117046136-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="1117046136-20">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="1117046136-20">]</span><span class="w">
+  </span><span class="p" data-group-id="1117046136-18">]</span><span class="w">
+</span><span class="p" data-group-id="1117046136-15">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="relu6/1">
+
+  <div class="detail-header">
+    <a href="#relu6/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">relu6(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Rectified linear unit 6 activation.</p><p>$$f(x_i) = \min_i(\max_i(x, 0), 6)$$</p><h2 id="relu6/1-examples" class="section-heading">
+  <a href="#relu6/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">relu6</span><span class="p" data-group-id="0403300459-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="0403300459-2">(</span><span class="p" data-group-id="0403300459-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="0403300459-3">]</span><span class="p" data-group-id="0403300459-2">)</span><span class="p" data-group-id="0403300459-1">)</span><span class="w">
+</span><span class="p" data-group-id="0403300459-4">#</span><span class="nc" data-group-id="0403300459-4">Nx.Tensor</span><span class="p" data-group-id="0403300459-4">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="0403300459-5">[</span><span class="mi">7</span><span class="p" data-group-id="0403300459-5">]</span><span class="w">
+  </span><span class="p" data-group-id="0403300459-6">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="0403300459-6">]</span><span class="w">
+</span><span class="p" data-group-id="0403300459-4">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">relu6</span><span class="p" data-group-id="0403300459-7">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="0403300459-8">(</span><span class="p" data-group-id="0403300459-9">[</span><span class="p" data-group-id="0403300459-10">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="0403300459-10">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0403300459-11">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="0403300459-11">]</span><span class="p" data-group-id="0403300459-9">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403300459-12">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="0403300459-12">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0403300459-13">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="0403300459-13">]</span><span class="p" data-group-id="0403300459-8">)</span><span class="p" data-group-id="0403300459-7">)</span><span class="w">
+</span><span class="p" data-group-id="0403300459-14">#</span><span class="nc" data-group-id="0403300459-14">Nx.Tensor</span><span class="p" data-group-id="0403300459-14">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="0403300459-15">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0403300459-15">]</span><span class="p" data-group-id="0403300459-16">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="0403300459-16">]</span><span class="w">
+  </span><span class="p" data-group-id="0403300459-17">[</span><span class="w">
+    </span><span class="p" data-group-id="0403300459-18">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="0403300459-18">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="0403300459-19">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="0403300459-19">]</span><span class="w">
+  </span><span class="p" data-group-id="0403300459-17">]</span><span class="w">
+</span><span class="p" data-group-id="0403300459-14">&gt;</span></code></pre><h2 id="relu6/1-references" class="section-heading">
+  <a href="#relu6/1-references" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  References
+</h2>
+<ul><li><a href="https://arxiv.org/abs/1704.04861v1">MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications</a></li></ul>
+  </section>
+</section>
+<section class="detail" id="selu/1">
+
+  <div class="detail-header">
+    <a href="#selu/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">selu(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Scaled exponential linear unit activation.</p><p>$$f(x_i) = \begin{cases} \lambda x &amp; x \geq 0 \newline
+\lambda \alpha(e^{x} - 1) &amp; x &lt; 0 \end{cases}$$</p><p>$$\alpha \approx 1.6733$$
+$$\lambda \approx 1.0507$$</p><h2 id="selu/1-examples" class="section-heading">
+  <a href="#selu/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">selu</span><span class="p" data-group-id="3817682862-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3817682862-2">(</span><span class="p" data-group-id="3817682862-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3817682862-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3817682862-4">[</span><span class="ss">:data</span><span class="p" data-group-id="3817682862-4">]</span><span class="p" data-group-id="3817682862-2">)</span><span class="p" data-group-id="3817682862-1">)</span><span class="w">
+</span><span class="p" data-group-id="3817682862-5">#</span><span class="nc" data-group-id="3817682862-5">Nx.Tensor</span><span class="p" data-group-id="3817682862-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="3817682862-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="3817682862-6">]</span><span class="w">
+  </span><span class="p" data-group-id="3817682862-7">[</span><span class="o">-</span><span class="mf">1.670568823814392</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.5201665163040161</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.1113307476043701</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0507010221481323</span><span class="p">,</span><span class="w"> </span><span class="mf">2.1014020442962646</span><span class="p">,</span><span class="w"> </span><span class="mf">3.1521029472351074</span><span class="p" data-group-id="3817682862-7">]</span><span class="w">
+</span><span class="p" data-group-id="3817682862-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">selu</span><span class="p" data-group-id="3817682862-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="3817682862-9">(</span><span class="p" data-group-id="3817682862-10">[</span><span class="p" data-group-id="3817682862-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="3817682862-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3817682862-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="3817682862-12">]</span><span class="p" data-group-id="3817682862-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3817682862-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3817682862-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3817682862-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="3817682862-14">]</span><span class="p" data-group-id="3817682862-9">)</span><span class="p" data-group-id="3817682862-8">)</span><span class="w">
+</span><span class="p" data-group-id="3817682862-15">#</span><span class="nc" data-group-id="3817682862-15">Nx.Tensor</span><span class="p" data-group-id="3817682862-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="3817682862-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3817682862-16">]</span><span class="p" data-group-id="3817682862-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="3817682862-17">]</span><span class="w">
+  </span><span class="p" data-group-id="3817682862-18">[</span><span class="w">
+    </span><span class="p" data-group-id="3817682862-19">[</span><span class="o">-</span><span class="mf">1.09375</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.5078125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.6640625</span><span class="p" data-group-id="3817682862-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="3817682862-20">[</span><span class="mf">1.046875</span><span class="p">,</span><span class="w"> </span><span class="mf">2.09375</span><span class="p">,</span><span class="w"> </span><span class="mf">3.140625</span><span class="p" data-group-id="3817682862-20">]</span><span class="w">
+  </span><span class="p" data-group-id="3817682862-18">]</span><span class="w">
+</span><span class="p" data-group-id="3817682862-15">&gt;</span></code></pre><h2 id="selu/1-references" class="section-heading">
+  <a href="#selu/1-references" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  References
+</h2>
+<ul><li><a href="https://arxiv.org/abs/1706.02515v5">Self-Normalizing Neural Networks</a></li></ul>
+  </section>
+</section>
+<section class="detail" id="sigmoid/1">
+
+  <div class="detail-header">
+    <a href="#sigmoid/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">sigmoid(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Sigmoid activation.</p><p>$$f(x_i) = \frac{1}{1 + e^{-x_i}}$$</p><h2 id="sigmoid/1-examples" class="section-heading">
+  <a href="#sigmoid/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">sigmoid</span><span class="p" data-group-id="2692152589-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="2692152589-2">(</span><span class="p" data-group-id="2692152589-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2692152589-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2692152589-4">[</span><span class="ss">:data</span><span class="p" data-group-id="2692152589-4">]</span><span class="p" data-group-id="2692152589-2">)</span><span class="p" data-group-id="2692152589-1">)</span><span class="w">
+</span><span class="p" data-group-id="2692152589-5">#</span><span class="nc" data-group-id="2692152589-5">Nx.Tensor</span><span class="p" data-group-id="2692152589-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="2692152589-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="2692152589-6">]</span><span class="w">
+  </span><span class="p" data-group-id="2692152589-7">[</span><span class="mf">0.04742587357759476</span><span class="p">,</span><span class="w"> </span><span class="mf">0.11920291930437088</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2689414322376251</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7310585975646973</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8807970881462097</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9525741338729858</span><span class="p" data-group-id="2692152589-7">]</span><span class="w">
+</span><span class="p" data-group-id="2692152589-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">sigmoid</span><span class="p" data-group-id="2692152589-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="2692152589-9">(</span><span class="p" data-group-id="2692152589-10">[</span><span class="p" data-group-id="2692152589-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="2692152589-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2692152589-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2692152589-12">]</span><span class="p" data-group-id="2692152589-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2692152589-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="2692152589-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2692152589-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="2692152589-14">]</span><span class="p" data-group-id="2692152589-9">)</span><span class="p" data-group-id="2692152589-8">)</span><span class="w">
+</span><span class="p" data-group-id="2692152589-15">#</span><span class="nc" data-group-id="2692152589-15">Nx.Tensor</span><span class="p" data-group-id="2692152589-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="2692152589-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2692152589-16">]</span><span class="p" data-group-id="2692152589-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="2692152589-17">]</span><span class="w">
+  </span><span class="p" data-group-id="2692152589-18">[</span><span class="w">
+    </span><span class="p" data-group-id="2692152589-19">[</span><span class="mf">0.267578125</span><span class="p">,</span><span class="w"> </span><span class="mf">0.119140625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.04736328125</span><span class="p" data-group-id="2692152589-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="2692152589-20">[</span><span class="mf">0.73046875</span><span class="p">,</span><span class="w"> </span><span class="mf">0.87890625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.94921875</span><span class="p" data-group-id="2692152589-20">]</span><span class="w">
+  </span><span class="p" data-group-id="2692152589-18">]</span><span class="w">
+</span><span class="p" data-group-id="2692152589-15">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="silu/1">
+
+  <div class="detail-header">
+    <a href="#silu/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">silu(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Sigmoid weighted linear unit activation.</p><p>$$f(x_i) = x\sigmoid(x)$$</p><h2 id="silu/1-examples" class="section-heading">
+  <a href="#silu/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">silu</span><span class="p" data-group-id="5308272700-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5308272700-2">(</span><span class="p" data-group-id="5308272700-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5308272700-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5308272700-4">[</span><span class="ss">:data</span><span class="p" data-group-id="5308272700-4">]</span><span class="p" data-group-id="5308272700-2">)</span><span class="p" data-group-id="5308272700-1">)</span><span class="w">
+</span><span class="p" data-group-id="5308272700-5">#</span><span class="nc" data-group-id="5308272700-5">Nx.Tensor</span><span class="p" data-group-id="5308272700-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="5308272700-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="5308272700-6">]</span><span class="w">
+  </span><span class="p" data-group-id="5308272700-7">[</span><span class="o">-</span><span class="mf">0.14227762818336487</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.23840583860874176</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.2689414322376251</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7310585975646973</span><span class="p">,</span><span class="w"> </span><span class="mf">1.7615941762924194</span><span class="p">,</span><span class="w"> </span><span class="mf">2.857722282409668</span><span class="p" data-group-id="5308272700-7">]</span><span class="w">
+</span><span class="p" data-group-id="5308272700-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">silu</span><span class="p" data-group-id="5308272700-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="5308272700-9">(</span><span class="p" data-group-id="5308272700-10">[</span><span class="p" data-group-id="5308272700-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="5308272700-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5308272700-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="5308272700-12">]</span><span class="p" data-group-id="5308272700-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5308272700-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5308272700-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5308272700-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="5308272700-14">]</span><span class="p" data-group-id="5308272700-9">)</span><span class="p" data-group-id="5308272700-8">)</span><span class="w">
+</span><span class="p" data-group-id="5308272700-15">#</span><span class="nc" data-group-id="5308272700-15">Nx.Tensor</span><span class="p" data-group-id="5308272700-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="5308272700-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5308272700-16">]</span><span class="p" data-group-id="5308272700-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="5308272700-17">]</span><span class="w">
+  </span><span class="p" data-group-id="5308272700-18">[</span><span class="w">
+    </span><span class="p" data-group-id="5308272700-19">[</span><span class="o">-</span><span class="mf">0.267578125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.23828125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.1416015625</span><span class="p" data-group-id="5308272700-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5308272700-20">[</span><span class="mf">0.73046875</span><span class="p">,</span><span class="w"> </span><span class="mf">1.7578125</span><span class="p">,</span><span class="w"> </span><span class="mf">2.84375</span><span class="p" data-group-id="5308272700-20">]</span><span class="w">
+  </span><span class="p" data-group-id="5308272700-18">]</span><span class="w">
+</span><span class="p" data-group-id="5308272700-15">&gt;</span></code></pre><h2 id="silu/1-references" class="section-heading">
+  <a href="#silu/1-references" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  References
+</h2>
+<ul><li><a href="https://arxiv.org/abs/1702.03118v3">Sigmoid-Weighted Linear Units for Neural Network Function Approximation in Reinforcement Learning</a></li></ul>
+  </section>
+</section>
+<section class="detail" id="softmax/2">
+
+    <span id="softmax/1"></span>
+
+  <div class="detail-header">
+    <a href="#softmax/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">softmax(x, opts \\ [])</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Softmax activation along an axis.</p><p>$$\frac{e^{x_i}}{\sum_i e^{x_i}}$$</p><h2 id="softmax/2-options" class="section-heading">
+  <a href="#softmax/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:axis</code> - softmax axis along which to calculate distribution.
+Defaults to 1.</li></ul><h2 id="softmax/2-examples" class="section-heading">
+  <a href="#softmax/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">softmax</span><span class="p" data-group-id="2021470355-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="2021470355-2">(</span><span class="p" data-group-id="2021470355-3">[</span><span class="p" data-group-id="2021470355-4">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2021470355-4">]</span><span class="p" data-group-id="2021470355-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2021470355-5">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="2021470355-5">]</span><span class="p" data-group-id="2021470355-2">)</span><span class="p" data-group-id="2021470355-1">)</span><span class="w">
+</span><span class="p" data-group-id="2021470355-6">#</span><span class="nc" data-group-id="2021470355-6">Nx.Tensor</span><span class="p" data-group-id="2021470355-6">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="2021470355-7">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="2021470355-7">]</span><span class="p" data-group-id="2021470355-8">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="2021470355-8">]</span><span class="w">
+  </span><span class="p" data-group-id="2021470355-9">[</span><span class="w">
+    </span><span class="p" data-group-id="2021470355-10">[</span><span class="mf">0.0015683004166930914</span><span class="p">,</span><span class="w"> </span><span class="mf">0.004263082519173622</span><span class="p">,</span><span class="w"> </span><span class="mf">0.011588259600102901</span><span class="p">,</span><span class="w"> </span><span class="mf">0.03150015324354172</span><span class="p">,</span><span class="w"> </span><span class="mf">0.08562629669904709</span><span class="p">,</span><span class="w"> </span><span class="mf">0.23275642096996307</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6326975226402283</span><span class="p" data-group-id="2021470355-10">]</span><span class="w">
+  </span><span class="p" data-group-id="2021470355-9">]</span><span class="w">
+</span><span class="p" data-group-id="2021470355-6">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">softmax</span><span class="p" data-group-id="2021470355-11">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="2021470355-12">(</span><span class="p" data-group-id="2021470355-13">[</span><span class="p" data-group-id="2021470355-14">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="2021470355-14">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2021470355-15">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2021470355-15">]</span><span class="p" data-group-id="2021470355-13">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2021470355-16">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="2021470355-16">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2021470355-17">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="2021470355-17">]</span><span class="p" data-group-id="2021470355-12">)</span><span class="p" data-group-id="2021470355-11">)</span><span class="w">
+</span><span class="p" data-group-id="2021470355-18">#</span><span class="nc" data-group-id="2021470355-18">Nx.Tensor</span><span class="p" data-group-id="2021470355-18">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="2021470355-19">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2021470355-19">]</span><span class="p" data-group-id="2021470355-20">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="2021470355-20">]</span><span class="w">
+  </span><span class="p" data-group-id="2021470355-21">[</span><span class="w">
+    </span><span class="p" data-group-id="2021470355-22">[</span><span class="mf">0.6640625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2431640625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.08935546875</span><span class="p" data-group-id="2021470355-22">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="2021470355-23">[</span><span class="mf">0.08935546875</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2431640625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6640625</span><span class="p" data-group-id="2021470355-23">]</span><span class="w">
+  </span><span class="p" data-group-id="2021470355-21">]</span><span class="w">
+</span><span class="p" data-group-id="2021470355-18">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="softplus/1">
+
+  <div class="detail-header">
+    <a href="#softplus/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">softplus(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Softplus activation.</p><p>$$\log(1 + e^x_i)$$</p><h2 id="softplus/1-examples" class="section-heading">
+  <a href="#softplus/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">softplus</span><span class="p" data-group-id="7849454822-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7849454822-2">(</span><span class="p" data-group-id="7849454822-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="7849454822-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7849454822-4">[</span><span class="ss">:data</span><span class="p" data-group-id="7849454822-4">]</span><span class="p" data-group-id="7849454822-2">)</span><span class="p" data-group-id="7849454822-1">)</span><span class="w">
+</span><span class="p" data-group-id="7849454822-5">#</span><span class="nc" data-group-id="7849454822-5">Nx.Tensor</span><span class="p" data-group-id="7849454822-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="7849454822-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="7849454822-6">]</span><span class="w">
+  </span><span class="p" data-group-id="7849454822-7">[</span><span class="mf">0.04858734831213951</span><span class="p">,</span><span class="w"> </span><span class="mf">0.12692801654338837</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3132616877555847</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6931471824645996</span><span class="p">,</span><span class="w"> </span><span class="mf">1.3132617473602295</span><span class="p">,</span><span class="w"> </span><span class="mf">2.1269280910491943</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0485873222351074</span><span class="p" data-group-id="7849454822-7">]</span><span class="w">
+</span><span class="p" data-group-id="7849454822-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">softplus</span><span class="p" data-group-id="7849454822-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="7849454822-9">(</span><span class="p" data-group-id="7849454822-10">[</span><span class="p" data-group-id="7849454822-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="7849454822-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7849454822-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="7849454822-12">]</span><span class="p" data-group-id="7849454822-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7849454822-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="7849454822-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7849454822-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="7849454822-14">]</span><span class="p" data-group-id="7849454822-9">)</span><span class="p" data-group-id="7849454822-8">)</span><span class="w">
+</span><span class="p" data-group-id="7849454822-15">#</span><span class="nc" data-group-id="7849454822-15">Nx.Tensor</span><span class="p" data-group-id="7849454822-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="7849454822-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7849454822-16">]</span><span class="p" data-group-id="7849454822-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="7849454822-17">]</span><span class="w">
+  </span><span class="p" data-group-id="7849454822-18">[</span><span class="w">
+    </span><span class="p" data-group-id="7849454822-19">[</span><span class="mf">0.3125</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1259765625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.04833984375</span><span class="p" data-group-id="7849454822-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="7849454822-20">[</span><span class="mf">1.3125</span><span class="p">,</span><span class="w"> </span><span class="mf">2.125</span><span class="p">,</span><span class="w"> </span><span class="mf">3.046875</span><span class="p" data-group-id="7849454822-20">]</span><span class="w">
+  </span><span class="p" data-group-id="7849454822-18">]</span><span class="w">
+</span><span class="p" data-group-id="7849454822-15">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="softsign/1">
+
+  <div class="detail-header">
+    <a href="#softsign/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">softsign(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Softsign activation.</p><p>$$f(x_i) = \frac{x_i}{|x_i| + 1}$$</p><h2 id="softsign/1-examples" class="section-heading">
+  <a href="#softsign/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">softsign</span><span class="p" data-group-id="2907524198-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="2907524198-2">(</span><span class="p" data-group-id="2907524198-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2907524198-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2907524198-4">[</span><span class="ss">:data</span><span class="p" data-group-id="2907524198-4">]</span><span class="p" data-group-id="2907524198-2">)</span><span class="p" data-group-id="2907524198-1">)</span><span class="w">
+</span><span class="p" data-group-id="2907524198-5">#</span><span class="nc" data-group-id="2907524198-5">Nx.Tensor</span><span class="p" data-group-id="2907524198-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="2907524198-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="2907524198-6">]</span><span class="w">
+  </span><span class="p" data-group-id="2907524198-7">[</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.6666666865348816</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6666666865348816</span><span class="p">,</span><span class="w"> </span><span class="mf">0.75</span><span class="p" data-group-id="2907524198-7">]</span><span class="w">
+</span><span class="p" data-group-id="2907524198-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">softsign</span><span class="p" data-group-id="2907524198-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="2907524198-9">(</span><span class="p" data-group-id="2907524198-10">[</span><span class="p" data-group-id="2907524198-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="2907524198-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2907524198-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="2907524198-12">]</span><span class="p" data-group-id="2907524198-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2907524198-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="2907524198-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2907524198-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="2907524198-14">]</span><span class="p" data-group-id="2907524198-9">)</span><span class="p" data-group-id="2907524198-8">)</span><span class="w">
+</span><span class="p" data-group-id="2907524198-15">#</span><span class="nc" data-group-id="2907524198-15">Nx.Tensor</span><span class="p" data-group-id="2907524198-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="2907524198-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2907524198-16">]</span><span class="p" data-group-id="2907524198-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="2907524198-17">]</span><span class="w">
+  </span><span class="p" data-group-id="2907524198-18">[</span><span class="w">
+    </span><span class="p" data-group-id="2907524198-19">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.6640625</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.75</span><span class="p" data-group-id="2907524198-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="2907524198-20">[</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6640625</span><span class="p">,</span><span class="w"> </span><span class="mf">0.75</span><span class="p" data-group-id="2907524198-20">]</span><span class="w">
+  </span><span class="p" data-group-id="2907524198-18">]</span><span class="w">
+</span><span class="p" data-group-id="2907524198-15">&gt;</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="tanh/1">
+
+  <div class="detail-header">
+    <a href="#tanh/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">tanh(x)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.1.0-dev/lib/axon/activations.ex#L0" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Hyperbolic tangent activation.</p><p>$$f(x_i) = \tanh(x_i)$$</p><h2 id="tanh/1-examples" class="section-heading">
+  <a href="#tanh/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+<pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">tanh</span><span class="p" data-group-id="6652067379-1">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6652067379-2">(</span><span class="p" data-group-id="6652067379-3">[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="6652067379-3">]</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6652067379-4">[</span><span class="ss">:data</span><span class="p" data-group-id="6652067379-4">]</span><span class="p" data-group-id="6652067379-2">)</span><span class="p" data-group-id="6652067379-1">)</span><span class="w">
+</span><span class="p" data-group-id="6652067379-5">#</span><span class="nc" data-group-id="6652067379-5">Nx.Tensor</span><span class="p" data-group-id="6652067379-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="6652067379-6">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p" data-group-id="6652067379-6">]</span><span class="w">
+  </span><span class="p" data-group-id="6652067379-7">[</span><span class="o">-</span><span class="mf">0.9950547814369202</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.9640275835990906</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.7615941762924194</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7615941762924194</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9640275835990906</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9950547814369202</span><span class="p" data-group-id="6652067379-7">]</span><span class="w">
+</span><span class="p" data-group-id="6652067379-5">&gt;</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Axon.Activations</span><span class="o">.</span><span class="n">tanh</span><span class="p" data-group-id="6652067379-8">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">tensor</span><span class="p" data-group-id="6652067379-9">(</span><span class="p" data-group-id="6652067379-10">[</span><span class="p" data-group-id="6652067379-11">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">3.0</span><span class="p" data-group-id="6652067379-11">]</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6652067379-12">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="p" data-group-id="6652067379-12">]</span><span class="p" data-group-id="6652067379-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6652067379-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="6652067379-13">}</span><span class="p">,</span><span class="w"> </span><span class="ss">names</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6652067379-14">[</span><span class="ss">:batch</span><span class="p">,</span><span class="w"> </span><span class="ss">:data</span><span class="p" data-group-id="6652067379-14">]</span><span class="p" data-group-id="6652067379-9">)</span><span class="p" data-group-id="6652067379-8">)</span><span class="w">
+</span><span class="p" data-group-id="6652067379-15">#</span><span class="nc" data-group-id="6652067379-15">Nx.Tensor</span><span class="p" data-group-id="6652067379-15">&lt;</span><span class="w">
+  </span><span class="n">bf16</span><span class="p" data-group-id="6652067379-16">[</span><span class="ss">batch</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6652067379-16">]</span><span class="p" data-group-id="6652067379-17">[</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="6652067379-17">]</span><span class="w">
+  </span><span class="p" data-group-id="6652067379-18">[</span><span class="w">
+    </span><span class="p" data-group-id="6652067379-19">[</span><span class="o">-</span><span class="mf">0.7578125</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.9609375</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.9921875</span><span class="p" data-group-id="6652067379-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="6652067379-20">[</span><span class="mf">0.7578125</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9609375</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9921875</span><span class="p" data-group-id="6652067379-20">]</span><span class="w">
+  </span><span class="p" data-group-id="6652067379-18">]</span><span class="w">
+</span><span class="p" data-group-id="6652067379-15">&gt;</span></code></pre>
+  </section>
+</section>
+
+          </div>
+        </section>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.25.3) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.css" integrity="sha384-t5CR+zwDAROtph0PXGte6ia8heboACF9R5l/DiY+WZ3P2lxNgvJkQk5n7GPvLMYw" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.js" integrity="sha384-FaFLTlohFghEIZkw6VGwmf9ISTubWAVYW8tG8+w2LAIftJEULZABrF9PPFv+tVkH" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/contrib/auto-render.min.js" integrity="sha384-bHBqxz8fokvgoJ/sc17HODNxa42TlaEhB+w8ZJXTc2nZf1VgEaFZeZvT4Mznfz0v" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+  </body>
+</html>
