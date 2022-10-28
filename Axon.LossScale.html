@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.28.6">
     <meta name="project" content="Axon v0.3.0">
 
-    <title>Axon.CompileError — Axon v0.3.0</title>
+    <title>Axon.LossScale — Axon v0.3.0</title>
     <link rel="stylesheet" href="dist/html-elixir-5CLCQQME.css" />
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
@@ -20,7 +20,7 @@
 
 
   </head>
-  <body data-type="modules" class="page-exception">
+  <body data-type="modules" class="page-module">
     <script>
 
       try {
@@ -99,16 +99,26 @@ Axon
 </button>
 
 
-    <a href="https://github.com/elixir-nx/axon/blob/v0.3.0/lib/axon/compiler.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/elixir-nx/axon/blob/v0.3.0/lib/axon/loss_scale.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Axon.CompileError</span> <small>exception</small>
+  <span translate="no">Axon.LossScale</span> 
   <small class="app-vsn" translate="no">(Axon v0.3.0)</small>
 
 </h1>
 
+
+  <section id="moduledoc">
+<p>Implementations of loss-scalers for use in mixed precision
+training.</p><p>Loss scaling is used to prevent underflow when using mixed
+precision during the model training process. Each loss-scale
+implementation here returns a 3-tuple of the functions:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="6976484719-1">{</span><span class="n">init_fn</span><span class="p">,</span><span class="w"> </span><span class="n">scale_fn</span><span class="p">,</span><span class="w"> </span><span class="n">unscale_fn</span><span class="p">,</span><span class="w"> </span><span class="n">adjust_fn</span><span class="p" data-group-id="6976484719-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.LossScale</span><span class="o">.</span><span class="n">static</span><span class="p" data-group-id="6976484719-2">(</span><span class="nc">Nx</span><span class="o">.</span><span class="n">power</span><span class="p" data-group-id="6976484719-3">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p" data-group-id="6976484719-3">)</span><span class="p" data-group-id="6976484719-2">)</span></code></pre><p>You can use these to scale/unscale loss and gradients as well
+as adjust the loss scale state.</p><p><a href="Axon.Loop.html#trainer/3"><code class="inline">Axon.Loop.trainer/3</code></a> builds loss-scaling in by default. You
+can reference the <a href="Axon.Loop.html#train_step/3"><code class="inline">Axon.Loop.train_step/3</code></a> implementation to
+see how loss-scaling is applied in practice.</p>
+  </section>
 
 
   <section id="summary" class="details-list">
@@ -127,11 +137,31 @@ Axon
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#message/1" translate="no">message(exception)</a>
+          <a href="#dynamic/2" translate="no">dynamic(loss_scale \\ 32768, opts \\ [])</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/elixir/Exception.html#c:message/1"><code class="inline">Exception.message/1</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Implements dynamic loss-scale.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#identity/0" translate="no">identity()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Implements identity loss-scale.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#static/1" translate="no">static(loss_scale \\ 32768)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Implements static loss-scale.</p></div>
 
       </div>
 
@@ -149,16 +179,20 @@ Axon
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="message/1">
+<section class="detail" id="dynamic/2">
+
+    <span id="dynamic/0"></span>
+
+    <span id="dynamic/1"></span>
 
   <div class="detail-header">
-    <a href="#message/1" class="detail-link" title="Link to this function">
+    <a href="#dynamic/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">message(exception)</h1>
+    <h1 class="signature" translate="no">dynamic(loss_scale \\ 32768, opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.3.0/lib/axon/compiler.ex#L4" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.3.0/lib/axon/loss_scale.ex#L66" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -168,7 +202,53 @@ Functions
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/elixir/Exception.html#c:message/1"><code class="inline">Exception.message/1</code></a>.</p>
+<p>Implements dynamic loss-scale.</p>
+  </section>
+</section>
+<section class="detail" id="identity/0">
+
+  <div class="detail-header">
+    <a href="#identity/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">identity()</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.3.0/lib/axon/loss_scale.ex#L28" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Implements identity loss-scale.</p>
+  </section>
+</section>
+<section class="detail" id="static/1">
+
+    <span id="static/0"></span>
+
+  <div class="detail-header">
+    <a href="#static/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">static(loss_scale \\ 32768)</h1>
+
+      <a href="https://github.com/elixir-nx/axon/blob/v0.3.0/lib/axon/loss_scale.ex#L37" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Implements static loss-scale.</p>
   </section>
 </section>
 
@@ -184,7 +264,7 @@ Functions
               <a href="https://hex.pm/packages/axon/0.3.0" class="line footer-hex-package">Package</a>
               <a href="https://preview.hex.pm/preview/axon/0.3.0" class="line">Preview</a>
 
-                <a href="https://preview.hex.pm/preview/axon/0.3.0/show/lib/axon/compiler.ex">(current file)</a>
+                <a href="https://preview.hex.pm/preview/axon/0.3.0/show/lib/axon/loss_scale.ex">(current file)</a>
 
             </span>
 
