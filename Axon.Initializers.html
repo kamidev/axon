@@ -4,22 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.31.1">
-    <meta name="project" content="Axon v0.6.1">
+    <meta name="generator" content="ExDoc v0.34.2">
+    <meta name="project" content="Axon v0.7.0">
 
 
-    <title>Axon.Initializers — Axon v0.6.1</title>
-    <link rel="stylesheet" href="dist/html-elixir-FM2CSD74.css" />
+    <title>Axon.Initializers — Axon v0.7.0</title>
+    <link rel="stylesheet" href="dist/html-elixir-F2VRIOKR.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-43PMFBC7.js"></script>
+    <script src="dist/handlebars.templates-K7URE6B4.js"></script>
     <script src="dist/sidebar_items-02629AA9.js"></script>
-
-      <script src="docs_config.js"></script>
-
-    <script async src="dist/html-L4O5OK2K.js"></script>
-
+    <script src="docs_config.js"></script>
+    <script async src="dist/html-YIPIRHGU.js"></script>
 
   </head>
   <body data-type="modules" class="page-module">
@@ -37,13 +34,11 @@
       } catch (error) { }
     </script>
 
-<div class="main">
+<div class="body-wrapper">
 
 <button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
-
-<div class="background-layer"></div>
 
 <nav id="sidebar" class="sidebar">
 
@@ -59,7 +54,7 @@
 Axon
         </a>
         <div class="sidebar-projectVersion" translate="no">
-          v0.6.1
+          v0.7.0
         </div>
       </div>
     </div>
@@ -93,46 +88,46 @@ Pages
 
 <main class="content">
   <output role="status" id="toast"></output>
-  <div class="content-outer">
-    <div id="content" class="content-inner">
-      <div class="top-search">
-        <div class="search-settings">
-          <form class="search-bar" action="search.html">
-            <label class="search-label">
-              <span class="sr-only">Search documentation of Axon</span>
-              <input name="q" type="text" class="search-input" placeholder="Search Documentation (press /)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-            </label>
-            <button type="submit" class="search-button" aria-label="Submit Search">
-              <i class="ri-search-2-line ri-lg" aria-hidden="true" title="Submit search"></i>
-            </button>
-            <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
-              <i class="ri-close-line ri-lg" title="Cancel search"></i>
-            </button>
-          </form>
-          <div class="autocomplete">
-          </div>
-          <button class="icon-settings display-settings">
-            <i class="ri-settings-3-line"></i>
-            <span class="sr-only">Settings</span>
+
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Axon</span>
+            <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          </label>
+          <button type="submit" class="search-button" aria-label="Submit Search">
+            <i class="ri-search-2-line ri-lg" aria-hidden="true" title="Submit search"></i>
           </button>
+          <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+            <i class="ri-close-line ri-lg" title="Cancel search"></i>
+          </button>
+        </form>
+        <div class="autocomplete">
         </div>
-
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
       </div>
+    </div>
 
-<h1>
+<div id="top-content">
+  <h1>
 
-    <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L1" title="View Source" class="icon-action" rel="help">
-      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-      <span class="sr-only">View Source</span>
-    </a>
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L1" title="View Source" class="icon-action" rel="help">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
 
-  <span translate="no">Axon.Initializers</span> 
-  <small class="app-vsn" translate="no">(Axon v0.6.1)</small>
+    <span translate="no">Axon.Initializers</span> 
+    <small class="app-vsn" translate="no">(Axon v0.7.0)</small>
 
-</h1>
+  </h1>
 
 
-  <section id="moduledoc">
+    <section id="moduledoc">
 <p>Parameter initializers.</p><p>Parameter initializers are used to initialize the weights
 and biases of a neural network. Because most deep learning
 optimization algorithms are iterative, they require an initial
@@ -153,10 +148,11 @@ should generally be large enough to avoid information loss but
 small enough to avoid exploding values. The initializers in
 this module have a default scale known to work well with
 the initialization strategy.</p><p>The functions in this module return initialization functions which
-take shapes and types and return tensors:</p><pre><code class="makeup elixir" translate="no"><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">zeros</span><span class="p" data-group-id="6850341374-1">(</span><span class="p" data-group-id="6850341374-1">)</span><span class="w">
-</span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="6850341374-2">(</span><span class="p" data-group-id="6850341374-3">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6850341374-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6850341374-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6850341374-4">}</span><span class="p" data-group-id="6850341374-2">)</span></code></pre><p>You may use these functions from within <code class="inline">defn</code> or outside.</p>
-  </section>
+take shapes and types and return tensors:</p><pre><code class="makeup elixir" translate="no"><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">zeros</span><span class="p" data-group-id="6755915680-1">(</span><span class="p" data-group-id="6755915680-1">)</span><span class="w">
+</span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="6755915680-2">(</span><span class="p" data-group-id="6755915680-3">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6755915680-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6755915680-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6755915680-4">}</span><span class="p" data-group-id="6755915680-2">)</span></code></pre><p>You may use these functions from within <code class="inline">defn</code> or outside.</p>
+    </section>
 
+</div>
 
   <section id="summary" class="details-list">
     <h1 class="section-heading">
@@ -172,7 +168,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#full/1" translate="no">full(value)</a>
+        <a href="#full/1" data-no-tooltip translate="no">full(value)</a>
 
       </div>
 
@@ -182,7 +178,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#glorot_normal/1" translate="no">glorot_normal(opts \\ [])</a>
+        <a href="#glorot_normal/1" data-no-tooltip translate="no">glorot_normal(opts \\ [])</a>
 
       </div>
 
@@ -192,7 +188,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#glorot_uniform/1" translate="no">glorot_uniform(opts \\ [])</a>
+        <a href="#glorot_uniform/1" data-no-tooltip translate="no">glorot_uniform(opts \\ [])</a>
 
       </div>
 
@@ -202,7 +198,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#he_normal/1" translate="no">he_normal(opts \\ [])</a>
+        <a href="#he_normal/1" data-no-tooltip translate="no">he_normal(opts \\ [])</a>
 
       </div>
 
@@ -212,7 +208,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#he_uniform/1" translate="no">he_uniform(opts \\ [])</a>
+        <a href="#he_uniform/1" data-no-tooltip translate="no">he_uniform(opts \\ [])</a>
 
       </div>
 
@@ -222,7 +218,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#identity/0" translate="no">identity()</a>
+        <a href="#identity/0" data-no-tooltip translate="no">identity()</a>
 
       </div>
 
@@ -232,7 +228,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#lecun_normal/1" translate="no">lecun_normal(opts \\ [])</a>
+        <a href="#lecun_normal/1" data-no-tooltip translate="no">lecun_normal(opts \\ [])</a>
 
       </div>
 
@@ -242,7 +238,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#lecun_uniform/1" translate="no">lecun_uniform(opts \\ [])</a>
+        <a href="#lecun_uniform/1" data-no-tooltip translate="no">lecun_uniform(opts \\ [])</a>
 
       </div>
 
@@ -252,7 +248,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#normal/1" translate="no">normal(opts \\ [])</a>
+        <a href="#normal/1" data-no-tooltip translate="no">normal(opts \\ [])</a>
 
       </div>
 
@@ -262,7 +258,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#ones/0" translate="no">ones()</a>
+        <a href="#ones/0" data-no-tooltip translate="no">ones()</a>
 
       </div>
 
@@ -272,7 +268,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#orthogonal/1" translate="no">orthogonal(opts \\ [])</a>
+        <a href="#orthogonal/1" data-no-tooltip translate="no">orthogonal(opts \\ [])</a>
 
       </div>
 
@@ -282,7 +278,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#uniform/1" translate="no">uniform(opts \\ [])</a>
+        <a href="#uniform/1" data-no-tooltip translate="no">uniform(opts \\ [])</a>
 
       </div>
 
@@ -292,7 +288,7 @@ take shapes and types and return tensors:</p><pre><code class="makeup elixir" tr
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#variance_scaling/1" translate="no">variance_scaling(opts \\ [])</a>
+        <a href="#variance_scaling/1" data-no-tooltip translate="no">variance_scaling(opts \\ [])</a>
 
       </div>
 
@@ -303,7 +299,7 @@ the given distribution and mode.</p></div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#zeros/0" translate="no">zeros()</a>
+        <a href="#zeros/0" data-no-tooltip translate="no">zeros()</a>
 
       </div>
 
@@ -327,13 +323,13 @@ the given distribution and mode.</p></div>
 <section class="detail" id="full/1">
 
   <div class="detail-header">
-    <a href="#full/1" class="detail-link" title="Link to this function">
+    <a href="#full/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">full(value)</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L114" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L114" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -349,16 +345,16 @@ the given distribution and mode.</p></div>
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">full</span><span class="p" data-group-id="5030680845-1">(</span><span class="mf">1.00</span><span class="p" data-group-id="5030680845-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="5030680845-2">(</span><span class="p" data-group-id="5030680845-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5030680845-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5030680845-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5030680845-4">}</span><span class="p" data-group-id="5030680845-2">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">full</span><span class="p" data-group-id="4635261876-1">(</span><span class="mf">1.00</span><span class="p" data-group-id="4635261876-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="4635261876-2">(</span><span class="p" data-group-id="4635261876-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4635261876-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4635261876-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4635261876-4">}</span><span class="p" data-group-id="4635261876-2">)</span><span class="w">
 </span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w">
-</span><span class="p" data-group-id="5030680845-5">#</span><span class="nc" data-group-id="5030680845-5">Nx.Tensor</span><span class="p" data-group-id="5030680845-5">&lt;</span><span class="w">
-  </span><span class="n">f32</span><span class="p" data-group-id="5030680845-6">[</span><span class="mi">2</span><span class="p" data-group-id="5030680845-6">]</span><span class="p" data-group-id="5030680845-7">[</span><span class="mi">2</span><span class="p" data-group-id="5030680845-7">]</span><span class="w">
-  </span><span class="p" data-group-id="5030680845-8">[</span><span class="w">
-    </span><span class="p" data-group-id="5030680845-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="5030680845-9">]</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="5030680845-10">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="5030680845-10">]</span><span class="w">
-  </span><span class="p" data-group-id="5030680845-8">]</span><span class="w">
-</span><span class="p" data-group-id="5030680845-5">&gt;</span></code></pre>
+</span><span class="p" data-group-id="4635261876-5">#</span><span class="nc" data-group-id="4635261876-5">Nx.Tensor</span><span class="p" data-group-id="4635261876-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="4635261876-6">[</span><span class="mi">2</span><span class="p" data-group-id="4635261876-6">]</span><span class="p" data-group-id="4635261876-7">[</span><span class="mi">2</span><span class="p" data-group-id="4635261876-7">]</span><span class="w">
+  </span><span class="p" data-group-id="4635261876-8">[</span><span class="w">
+    </span><span class="p" data-group-id="4635261876-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4635261876-9">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="4635261876-10">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4635261876-10">]</span><span class="w">
+  </span><span class="p" data-group-id="4635261876-8">]</span><span class="w">
+</span><span class="p" data-group-id="4635261876-5">&gt;</span></code></pre>
   </section>
 </section>
 <section class="detail" id="glorot_normal/1">
@@ -366,13 +362,13 @@ the given distribution and mode.</p></div>
     <span id="glorot_normal/0"></span>
 
   <div class="detail-header">
-    <a href="#glorot_normal/1" class="detail-link" title="Link to this function">
+    <a href="#glorot_normal/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">glorot_normal(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L406" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L406" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -397,19 +393,19 @@ normal initializer.</p><h2 id="glorot_normal/1-options" class="section-heading">
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">glorot_normal</span><span class="p" data-group-id="5828358077-1">(</span><span class="p" data-group-id="5828358077-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="5828358077-2">(</span><span class="p" data-group-id="5828358077-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5828358077-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5828358077-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5828358077-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="5828358077-5">(</span><span class="mi">1</span><span class="p" data-group-id="5828358077-5">)</span><span class="p" data-group-id="5828358077-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="5828358077-6">(</span><span class="n">t</span><span class="p" data-group-id="5828358077-6">)</span><span class="w">
-</span><span class="p" data-group-id="5828358077-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5828358077-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="5828358077-8">(</span><span class="n">t</span><span class="p" data-group-id="5828358077-8">)</span><span class="w">
-</span><span class="p" data-group-id="5828358077-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5828358077-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">glorot_normal</span><span class="p" data-group-id="2964663391-1">(</span><span class="p" data-group-id="2964663391-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="2964663391-2">(</span><span class="p" data-group-id="2964663391-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2964663391-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2964663391-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="2964663391-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="2964663391-5">(</span><span class="mi">1</span><span class="p" data-group-id="2964663391-5">)</span><span class="p" data-group-id="2964663391-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="2964663391-6">(</span><span class="n">t</span><span class="p" data-group-id="2964663391-6">)</span><span class="w">
+</span><span class="p" data-group-id="2964663391-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2964663391-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="2964663391-8">(</span><span class="n">t</span><span class="p" data-group-id="2964663391-8">)</span><span class="w">
+</span><span class="p" data-group-id="2964663391-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="2964663391-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">glorot_normal</span><span class="p" data-group-id="5828358077-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="5828358077-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="5828358077-11">(</span><span class="p" data-group-id="5828358077-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5828358077-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5828358077-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5828358077-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="5828358077-14">(</span><span class="mi">1</span><span class="p" data-group-id="5828358077-14">)</span><span class="p" data-group-id="5828358077-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="5828358077-15">(</span><span class="n">t</span><span class="p" data-group-id="5828358077-15">)</span><span class="w">
-</span><span class="p" data-group-id="5828358077-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5828358077-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="5828358077-17">(</span><span class="n">t</span><span class="p" data-group-id="5828358077-17">)</span><span class="w">
-</span><span class="p" data-group-id="5828358077-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5828358077-18">}</span></code></pre><h2 id="glorot_normal/1-references" class="section-heading">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">glorot_normal</span><span class="p" data-group-id="2964663391-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="2964663391-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="2964663391-11">(</span><span class="p" data-group-id="2964663391-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2964663391-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2964663391-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="2964663391-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="2964663391-14">(</span><span class="mi">1</span><span class="p" data-group-id="2964663391-14">)</span><span class="p" data-group-id="2964663391-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="2964663391-15">(</span><span class="n">t</span><span class="p" data-group-id="2964663391-15">)</span><span class="w">
+</span><span class="p" data-group-id="2964663391-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2964663391-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="2964663391-17">(</span><span class="n">t</span><span class="p" data-group-id="2964663391-17">)</span><span class="w">
+</span><span class="p" data-group-id="2964663391-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="2964663391-18">}</span></code></pre><h2 id="glorot_normal/1-references" class="section-heading">
   <a href="#glorot_normal/1-references" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -423,13 +419,13 @@ normal initializer.</p><h2 id="glorot_normal/1-options" class="section-heading">
     <span id="glorot_uniform/0"></span>
 
   <div class="detail-header">
-    <a href="#glorot_uniform/1" class="detail-link" title="Link to this function">
+    <a href="#glorot_uniform/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">glorot_uniform(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L355" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L355" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -454,19 +450,19 @@ uniform initializer.</p><h2 id="glorot_uniform/1-options" class="section-heading
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">glorot_uniform</span><span class="p" data-group-id="9858722115-1">(</span><span class="p" data-group-id="9858722115-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="9858722115-2">(</span><span class="p" data-group-id="9858722115-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="9858722115-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9858722115-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="9858722115-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="9858722115-5">(</span><span class="mi">1</span><span class="p" data-group-id="9858722115-5">)</span><span class="p" data-group-id="9858722115-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="9858722115-6">(</span><span class="n">t</span><span class="p" data-group-id="9858722115-6">)</span><span class="w">
-</span><span class="p" data-group-id="9858722115-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="9858722115-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="9858722115-8">(</span><span class="n">t</span><span class="p" data-group-id="9858722115-8">)</span><span class="w">
-</span><span class="p" data-group-id="9858722115-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="9858722115-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">glorot_uniform</span><span class="p" data-group-id="7729704332-1">(</span><span class="p" data-group-id="7729704332-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="7729704332-2">(</span><span class="p" data-group-id="7729704332-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7729704332-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7729704332-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7729704332-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="7729704332-5">(</span><span class="mi">1</span><span class="p" data-group-id="7729704332-5">)</span><span class="p" data-group-id="7729704332-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="7729704332-6">(</span><span class="n">t</span><span class="p" data-group-id="7729704332-6">)</span><span class="w">
+</span><span class="p" data-group-id="7729704332-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7729704332-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="7729704332-8">(</span><span class="n">t</span><span class="p" data-group-id="7729704332-8">)</span><span class="w">
+</span><span class="p" data-group-id="7729704332-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7729704332-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">glorot_uniform</span><span class="p" data-group-id="9858722115-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="9858722115-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="9858722115-11">(</span><span class="p" data-group-id="9858722115-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="9858722115-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9858722115-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="9858722115-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="9858722115-14">(</span><span class="mi">1</span><span class="p" data-group-id="9858722115-14">)</span><span class="p" data-group-id="9858722115-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="9858722115-15">(</span><span class="n">t</span><span class="p" data-group-id="9858722115-15">)</span><span class="w">
-</span><span class="p" data-group-id="9858722115-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="9858722115-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="9858722115-17">(</span><span class="n">t</span><span class="p" data-group-id="9858722115-17">)</span><span class="w">
-</span><span class="p" data-group-id="9858722115-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="9858722115-18">}</span></code></pre><h2 id="glorot_uniform/1-references" class="section-heading">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">glorot_uniform</span><span class="p" data-group-id="7729704332-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="7729704332-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="7729704332-11">(</span><span class="p" data-group-id="7729704332-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7729704332-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7729704332-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="7729704332-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="7729704332-14">(</span><span class="mi">1</span><span class="p" data-group-id="7729704332-14">)</span><span class="p" data-group-id="7729704332-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="7729704332-15">(</span><span class="n">t</span><span class="p" data-group-id="7729704332-15">)</span><span class="w">
+</span><span class="p" data-group-id="7729704332-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7729704332-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="7729704332-17">(</span><span class="n">t</span><span class="p" data-group-id="7729704332-17">)</span><span class="w">
+</span><span class="p" data-group-id="7729704332-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="7729704332-18">}</span></code></pre><h2 id="glorot_uniform/1-references" class="section-heading">
   <a href="#glorot_uniform/1-references" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -480,13 +476,13 @@ uniform initializer.</p><h2 id="glorot_uniform/1-options" class="section-heading
     <span id="he_normal/0"></span>
 
   <div class="detail-header">
-    <a href="#he_normal/1" class="detail-link" title="Link to this function">
+    <a href="#he_normal/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">he_normal(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L502" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L502" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -510,19 +506,19 @@ and <code class="inline">distribution: :truncated_normal</code>.</p><h2 id="he_n
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">he_normal</span><span class="p" data-group-id="0665666458-1">(</span><span class="p" data-group-id="0665666458-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="0665666458-2">(</span><span class="p" data-group-id="0665666458-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0665666458-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0665666458-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="0665666458-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="0665666458-5">(</span><span class="mi">1</span><span class="p" data-group-id="0665666458-5">)</span><span class="p" data-group-id="0665666458-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="0665666458-6">(</span><span class="n">t</span><span class="p" data-group-id="0665666458-6">)</span><span class="w">
-</span><span class="p" data-group-id="0665666458-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0665666458-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="0665666458-8">(</span><span class="n">t</span><span class="p" data-group-id="0665666458-8">)</span><span class="w">
-</span><span class="p" data-group-id="0665666458-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="0665666458-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">he_normal</span><span class="p" data-group-id="6085703525-1">(</span><span class="p" data-group-id="6085703525-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="6085703525-2">(</span><span class="p" data-group-id="6085703525-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6085703525-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6085703525-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6085703525-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="6085703525-5">(</span><span class="mi">1</span><span class="p" data-group-id="6085703525-5">)</span><span class="p" data-group-id="6085703525-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="6085703525-6">(</span><span class="n">t</span><span class="p" data-group-id="6085703525-6">)</span><span class="w">
+</span><span class="p" data-group-id="6085703525-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6085703525-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="6085703525-8">(</span><span class="n">t</span><span class="p" data-group-id="6085703525-8">)</span><span class="w">
+</span><span class="p" data-group-id="6085703525-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6085703525-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">he_normal</span><span class="p" data-group-id="0665666458-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="0665666458-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="0665666458-11">(</span><span class="p" data-group-id="0665666458-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0665666458-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0665666458-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="0665666458-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="0665666458-14">(</span><span class="mi">1</span><span class="p" data-group-id="0665666458-14">)</span><span class="p" data-group-id="0665666458-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="0665666458-15">(</span><span class="n">t</span><span class="p" data-group-id="0665666458-15">)</span><span class="w">
-</span><span class="p" data-group-id="0665666458-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0665666458-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="0665666458-17">(</span><span class="n">t</span><span class="p" data-group-id="0665666458-17">)</span><span class="w">
-</span><span class="p" data-group-id="0665666458-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="0665666458-18">}</span></code></pre><h2 id="he_normal/1-references" class="section-heading">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">he_normal</span><span class="p" data-group-id="6085703525-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="6085703525-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="6085703525-11">(</span><span class="p" data-group-id="6085703525-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6085703525-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6085703525-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="6085703525-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="6085703525-14">(</span><span class="mi">1</span><span class="p" data-group-id="6085703525-14">)</span><span class="p" data-group-id="6085703525-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="6085703525-15">(</span><span class="n">t</span><span class="p" data-group-id="6085703525-15">)</span><span class="w">
+</span><span class="p" data-group-id="6085703525-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6085703525-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="6085703525-17">(</span><span class="n">t</span><span class="p" data-group-id="6085703525-17">)</span><span class="w">
+</span><span class="p" data-group-id="6085703525-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="6085703525-18">}</span></code></pre><h2 id="he_normal/1-references" class="section-heading">
   <a href="#he_normal/1-references" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -536,13 +532,13 @@ and <code class="inline">distribution: :truncated_normal</code>.</p><h2 id="he_n
     <span id="he_uniform/0"></span>
 
   <div class="detail-header">
-    <a href="#he_uniform/1" class="detail-link" title="Link to this function">
+    <a href="#he_uniform/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">he_uniform(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L454" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L454" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -566,19 +562,19 @@ and <code class="inline">distribution: :uniform</code>.</p><h2 id="he_uniform/1-
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">he_uniform</span><span class="p" data-group-id="8539877389-1">(</span><span class="p" data-group-id="8539877389-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="8539877389-2">(</span><span class="p" data-group-id="8539877389-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="8539877389-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8539877389-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8539877389-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="8539877389-5">(</span><span class="mi">1</span><span class="p" data-group-id="8539877389-5">)</span><span class="p" data-group-id="8539877389-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="8539877389-6">(</span><span class="n">t</span><span class="p" data-group-id="8539877389-6">)</span><span class="w">
-</span><span class="p" data-group-id="8539877389-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="8539877389-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="8539877389-8">(</span><span class="n">t</span><span class="p" data-group-id="8539877389-8">)</span><span class="w">
-</span><span class="p" data-group-id="8539877389-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="8539877389-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">he_uniform</span><span class="p" data-group-id="3969965920-1">(</span><span class="p" data-group-id="3969965920-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="3969965920-2">(</span><span class="p" data-group-id="3969965920-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3969965920-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3969965920-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3969965920-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="3969965920-5">(</span><span class="mi">1</span><span class="p" data-group-id="3969965920-5">)</span><span class="p" data-group-id="3969965920-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="3969965920-6">(</span><span class="n">t</span><span class="p" data-group-id="3969965920-6">)</span><span class="w">
+</span><span class="p" data-group-id="3969965920-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3969965920-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="3969965920-8">(</span><span class="n">t</span><span class="p" data-group-id="3969965920-8">)</span><span class="w">
+</span><span class="p" data-group-id="3969965920-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3969965920-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">he_uniform</span><span class="p" data-group-id="8539877389-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="8539877389-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="8539877389-11">(</span><span class="p" data-group-id="8539877389-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="8539877389-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8539877389-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="8539877389-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="8539877389-14">(</span><span class="mi">1</span><span class="p" data-group-id="8539877389-14">)</span><span class="p" data-group-id="8539877389-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="8539877389-15">(</span><span class="n">t</span><span class="p" data-group-id="8539877389-15">)</span><span class="w">
-</span><span class="p" data-group-id="8539877389-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="8539877389-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="8539877389-17">(</span><span class="n">t</span><span class="p" data-group-id="8539877389-17">)</span><span class="w">
-</span><span class="p" data-group-id="8539877389-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="8539877389-18">}</span></code></pre><h2 id="he_uniform/1-references" class="section-heading">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">he_uniform</span><span class="p" data-group-id="3969965920-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="3969965920-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="3969965920-11">(</span><span class="p" data-group-id="3969965920-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3969965920-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3969965920-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3969965920-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="3969965920-14">(</span><span class="mi">1</span><span class="p" data-group-id="3969965920-14">)</span><span class="p" data-group-id="3969965920-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="3969965920-15">(</span><span class="n">t</span><span class="p" data-group-id="3969965920-15">)</span><span class="w">
+</span><span class="p" data-group-id="3969965920-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3969965920-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="3969965920-17">(</span><span class="n">t</span><span class="p" data-group-id="3969965920-17">)</span><span class="w">
+</span><span class="p" data-group-id="3969965920-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3969965920-18">}</span></code></pre><h2 id="he_uniform/1-references" class="section-heading">
   <a href="#he_uniform/1-references" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -590,13 +586,13 @@ and <code class="inline">distribution: :uniform</code>.</p><h2 id="he_uniform/1-
 <section class="detail" id="identity/0">
 
   <div class="detail-header">
-    <a href="#identity/0" class="detail-link" title="Link to this function">
+    <a href="#identity/0" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">identity()</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L141" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L141" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -612,16 +608,16 @@ and <code class="inline">distribution: :uniform</code>.</p><h2 id="he_uniform/1-
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">identity</span><span class="p" data-group-id="4999711104-1">(</span><span class="p" data-group-id="4999711104-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="4999711104-2">(</span><span class="p" data-group-id="4999711104-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4999711104-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4999711104-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4999711104-4">}</span><span class="p" data-group-id="4999711104-2">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">identity</span><span class="p" data-group-id="7145843303-1">(</span><span class="p" data-group-id="7145843303-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="7145843303-2">(</span><span class="p" data-group-id="7145843303-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7145843303-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7145843303-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7145843303-4">}</span><span class="p" data-group-id="7145843303-2">)</span><span class="w">
 </span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w">
-</span><span class="p" data-group-id="4999711104-5">#</span><span class="nc" data-group-id="4999711104-5">Nx.Tensor</span><span class="p" data-group-id="4999711104-5">&lt;</span><span class="w">
-  </span><span class="n">f32</span><span class="p" data-group-id="4999711104-6">[</span><span class="mi">2</span><span class="p" data-group-id="4999711104-6">]</span><span class="p" data-group-id="4999711104-7">[</span><span class="mi">2</span><span class="p" data-group-id="4999711104-7">]</span><span class="w">
-  </span><span class="p" data-group-id="4999711104-8">[</span><span class="w">
-    </span><span class="p" data-group-id="4999711104-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="4999711104-9">]</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="4999711104-10">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4999711104-10">]</span><span class="w">
-  </span><span class="p" data-group-id="4999711104-8">]</span><span class="w">
-</span><span class="p" data-group-id="4999711104-5">&gt;</span></code></pre>
+</span><span class="p" data-group-id="7145843303-5">#</span><span class="nc" data-group-id="7145843303-5">Nx.Tensor</span><span class="p" data-group-id="7145843303-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="7145843303-6">[</span><span class="mi">2</span><span class="p" data-group-id="7145843303-6">]</span><span class="p" data-group-id="7145843303-7">[</span><span class="mi">2</span><span class="p" data-group-id="7145843303-7">]</span><span class="w">
+  </span><span class="p" data-group-id="7145843303-8">[</span><span class="w">
+    </span><span class="p" data-group-id="7145843303-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="7145843303-9">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="7145843303-10">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="7145843303-10">]</span><span class="w">
+  </span><span class="p" data-group-id="7145843303-8">]</span><span class="w">
+</span><span class="p" data-group-id="7145843303-5">&gt;</span></code></pre>
   </section>
 </section>
 <section class="detail" id="lecun_normal/1">
@@ -629,13 +625,13 @@ and <code class="inline">distribution: :uniform</code>.</p><h2 id="he_uniform/1-
     <span id="lecun_normal/0"></span>
 
   <div class="detail-header">
-    <a href="#lecun_normal/1" class="detail-link" title="Link to this function">
+    <a href="#lecun_normal/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">lecun_normal(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L304" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L304" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -659,19 +655,19 @@ and <code class="inline">distribution: :truncated_normal</code>.</p><h2 id="lecu
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">lecun_normal</span><span class="p" data-group-id="7091220998-1">(</span><span class="p" data-group-id="7091220998-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="7091220998-2">(</span><span class="p" data-group-id="7091220998-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7091220998-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7091220998-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7091220998-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="7091220998-5">(</span><span class="mi">1</span><span class="p" data-group-id="7091220998-5">)</span><span class="p" data-group-id="7091220998-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="7091220998-6">(</span><span class="n">t</span><span class="p" data-group-id="7091220998-6">)</span><span class="w">
-</span><span class="p" data-group-id="7091220998-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7091220998-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="7091220998-8">(</span><span class="n">t</span><span class="p" data-group-id="7091220998-8">)</span><span class="w">
-</span><span class="p" data-group-id="7091220998-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7091220998-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">lecun_normal</span><span class="p" data-group-id="0519632961-1">(</span><span class="p" data-group-id="0519632961-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="0519632961-2">(</span><span class="p" data-group-id="0519632961-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0519632961-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0519632961-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="0519632961-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="0519632961-5">(</span><span class="mi">1</span><span class="p" data-group-id="0519632961-5">)</span><span class="p" data-group-id="0519632961-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="0519632961-6">(</span><span class="n">t</span><span class="p" data-group-id="0519632961-6">)</span><span class="w">
+</span><span class="p" data-group-id="0519632961-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0519632961-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="0519632961-8">(</span><span class="n">t</span><span class="p" data-group-id="0519632961-8">)</span><span class="w">
+</span><span class="p" data-group-id="0519632961-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="0519632961-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">lecun_normal</span><span class="p" data-group-id="7091220998-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="7091220998-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="7091220998-11">(</span><span class="p" data-group-id="7091220998-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7091220998-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7091220998-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="7091220998-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="7091220998-14">(</span><span class="mi">1</span><span class="p" data-group-id="7091220998-14">)</span><span class="p" data-group-id="7091220998-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="7091220998-15">(</span><span class="n">t</span><span class="p" data-group-id="7091220998-15">)</span><span class="w">
-</span><span class="p" data-group-id="7091220998-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7091220998-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="7091220998-17">(</span><span class="n">t</span><span class="p" data-group-id="7091220998-17">)</span><span class="w">
-</span><span class="p" data-group-id="7091220998-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="7091220998-18">}</span></code></pre><h2 id="lecun_normal/1-references" class="section-heading">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">lecun_normal</span><span class="p" data-group-id="0519632961-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="0519632961-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="0519632961-11">(</span><span class="p" data-group-id="0519632961-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0519632961-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0519632961-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="0519632961-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="0519632961-14">(</span><span class="mi">1</span><span class="p" data-group-id="0519632961-14">)</span><span class="p" data-group-id="0519632961-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="0519632961-15">(</span><span class="n">t</span><span class="p" data-group-id="0519632961-15">)</span><span class="w">
+</span><span class="p" data-group-id="0519632961-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0519632961-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="0519632961-17">(</span><span class="n">t</span><span class="p" data-group-id="0519632961-17">)</span><span class="w">
+</span><span class="p" data-group-id="0519632961-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="0519632961-18">}</span></code></pre><h2 id="lecun_normal/1-references" class="section-heading">
   <a href="#lecun_normal/1-references" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -685,13 +681,13 @@ and <code class="inline">distribution: :truncated_normal</code>.</p><h2 id="lecu
     <span id="lecun_uniform/0"></span>
 
   <div class="detail-header">
-    <a href="#lecun_uniform/1" class="detail-link" title="Link to this function">
+    <a href="#lecun_uniform/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">lecun_uniform(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L256" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L256" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -715,19 +711,19 @@ and <code class="inline">distribution: :uniform</code>.</p><h2 id="lecun_uniform
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">lecun_uniform</span><span class="p" data-group-id="3837191449-1">(</span><span class="p" data-group-id="3837191449-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="3837191449-2">(</span><span class="p" data-group-id="3837191449-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3837191449-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3837191449-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3837191449-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="3837191449-5">(</span><span class="mi">1</span><span class="p" data-group-id="3837191449-5">)</span><span class="p" data-group-id="3837191449-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="3837191449-6">(</span><span class="n">t</span><span class="p" data-group-id="3837191449-6">)</span><span class="w">
-</span><span class="p" data-group-id="3837191449-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3837191449-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="3837191449-8">(</span><span class="n">t</span><span class="p" data-group-id="3837191449-8">)</span><span class="w">
-</span><span class="p" data-group-id="3837191449-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3837191449-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">lecun_uniform</span><span class="p" data-group-id="5337267066-1">(</span><span class="p" data-group-id="5337267066-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="5337267066-2">(</span><span class="p" data-group-id="5337267066-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5337267066-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5337267066-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5337267066-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="5337267066-5">(</span><span class="mi">1</span><span class="p" data-group-id="5337267066-5">)</span><span class="p" data-group-id="5337267066-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="5337267066-6">(</span><span class="n">t</span><span class="p" data-group-id="5337267066-6">)</span><span class="w">
+</span><span class="p" data-group-id="5337267066-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5337267066-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="5337267066-8">(</span><span class="n">t</span><span class="p" data-group-id="5337267066-8">)</span><span class="w">
+</span><span class="p" data-group-id="5337267066-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5337267066-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">lecun_uniform</span><span class="p" data-group-id="3837191449-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="3837191449-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="3837191449-11">(</span><span class="p" data-group-id="3837191449-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3837191449-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3837191449-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3837191449-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="3837191449-14">(</span><span class="mi">1</span><span class="p" data-group-id="3837191449-14">)</span><span class="p" data-group-id="3837191449-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="3837191449-15">(</span><span class="n">t</span><span class="p" data-group-id="3837191449-15">)</span><span class="w">
-</span><span class="p" data-group-id="3837191449-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3837191449-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="3837191449-17">(</span><span class="n">t</span><span class="p" data-group-id="3837191449-17">)</span><span class="w">
-</span><span class="p" data-group-id="3837191449-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3837191449-18">}</span></code></pre><h2 id="lecun_uniform/1-references" class="section-heading">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">lecun_uniform</span><span class="p" data-group-id="5337267066-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="5337267066-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="5337267066-11">(</span><span class="p" data-group-id="5337267066-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5337267066-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5337267066-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5337267066-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="5337267066-14">(</span><span class="mi">1</span><span class="p" data-group-id="5337267066-14">)</span><span class="p" data-group-id="5337267066-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="5337267066-15">(</span><span class="n">t</span><span class="p" data-group-id="5337267066-15">)</span><span class="w">
+</span><span class="p" data-group-id="5337267066-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5337267066-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="5337267066-17">(</span><span class="n">t</span><span class="p" data-group-id="5337267066-17">)</span><span class="w">
+</span><span class="p" data-group-id="5337267066-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5337267066-18">}</span></code></pre><h2 id="lecun_uniform/1-references" class="section-heading">
   <a href="#lecun_uniform/1-references" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -741,13 +737,13 @@ and <code class="inline">distribution: :uniform</code>.</p><h2 id="lecun_uniform
     <span id="normal/0"></span>
 
   <div class="detail-header">
-    <a href="#normal/1" class="detail-link" title="Link to this function">
+    <a href="#normal/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">normal(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L214" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L214" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -769,31 +765,31 @@ and <code class="inline">distribution: :uniform</code>.</p><h2 id="lecun_uniform
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">normal</span><span class="p" data-group-id="5252628007-1">(</span><span class="p" data-group-id="5252628007-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="5252628007-2">(</span><span class="p" data-group-id="5252628007-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5252628007-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5252628007-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5252628007-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="5252628007-5">(</span><span class="mi">1</span><span class="p" data-group-id="5252628007-5">)</span><span class="p" data-group-id="5252628007-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="5252628007-6">(</span><span class="n">t</span><span class="p" data-group-id="5252628007-6">)</span><span class="w">
-</span><span class="p" data-group-id="5252628007-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5252628007-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="5252628007-8">(</span><span class="n">t</span><span class="p" data-group-id="5252628007-8">)</span><span class="w">
-</span><span class="p" data-group-id="5252628007-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5252628007-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">normal</span><span class="p" data-group-id="4872890700-1">(</span><span class="p" data-group-id="4872890700-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="4872890700-2">(</span><span class="p" data-group-id="4872890700-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4872890700-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4872890700-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4872890700-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="4872890700-5">(</span><span class="mi">1</span><span class="p" data-group-id="4872890700-5">)</span><span class="p" data-group-id="4872890700-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="4872890700-6">(</span><span class="n">t</span><span class="p" data-group-id="4872890700-6">)</span><span class="w">
+</span><span class="p" data-group-id="4872890700-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4872890700-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="4872890700-8">(</span><span class="n">t</span><span class="p" data-group-id="4872890700-8">)</span><span class="w">
+</span><span class="p" data-group-id="4872890700-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="4872890700-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">normal</span><span class="p" data-group-id="5252628007-10">(</span><span class="ss">mean</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="5252628007-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="5252628007-11">(</span><span class="p" data-group-id="5252628007-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5252628007-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5252628007-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5252628007-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="5252628007-14">(</span><span class="mi">1</span><span class="p" data-group-id="5252628007-14">)</span><span class="p" data-group-id="5252628007-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="5252628007-15">(</span><span class="n">t</span><span class="p" data-group-id="5252628007-15">)</span><span class="w">
-</span><span class="p" data-group-id="5252628007-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5252628007-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="5252628007-17">(</span><span class="n">t</span><span class="p" data-group-id="5252628007-17">)</span><span class="w">
-</span><span class="p" data-group-id="5252628007-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="5252628007-18">}</span></code></pre>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">normal</span><span class="p" data-group-id="4872890700-10">(</span><span class="ss">mean</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="4872890700-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="4872890700-11">(</span><span class="p" data-group-id="4872890700-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4872890700-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4872890700-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="4872890700-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="4872890700-14">(</span><span class="mi">1</span><span class="p" data-group-id="4872890700-14">)</span><span class="p" data-group-id="4872890700-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="4872890700-15">(</span><span class="n">t</span><span class="p" data-group-id="4872890700-15">)</span><span class="w">
+</span><span class="p" data-group-id="4872890700-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="4872890700-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="4872890700-17">(</span><span class="n">t</span><span class="p" data-group-id="4872890700-17">)</span><span class="w">
+</span><span class="p" data-group-id="4872890700-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="4872890700-18">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="ones/0">
 
   <div class="detail-header">
-    <a href="#ones/0" class="detail-link" title="Link to this function">
+    <a href="#ones/0" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">ones()</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L87" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L87" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -809,16 +805,16 @@ and <code class="inline">distribution: :uniform</code>.</p><h2 id="lecun_uniform
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">ones</span><span class="p" data-group-id="6897271209-1">(</span><span class="p" data-group-id="6897271209-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="6897271209-2">(</span><span class="p" data-group-id="6897271209-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6897271209-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6897271209-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6897271209-4">}</span><span class="p" data-group-id="6897271209-2">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">ones</span><span class="p" data-group-id="1438043808-1">(</span><span class="p" data-group-id="1438043808-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="1438043808-2">(</span><span class="p" data-group-id="1438043808-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="1438043808-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1438043808-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="1438043808-4">}</span><span class="p" data-group-id="1438043808-2">)</span><span class="w">
 </span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w">
-</span><span class="p" data-group-id="6897271209-5">#</span><span class="nc" data-group-id="6897271209-5">Nx.Tensor</span><span class="p" data-group-id="6897271209-5">&lt;</span><span class="w">
-  </span><span class="n">f32</span><span class="p" data-group-id="6897271209-6">[</span><span class="mi">2</span><span class="p" data-group-id="6897271209-6">]</span><span class="p" data-group-id="6897271209-7">[</span><span class="mi">2</span><span class="p" data-group-id="6897271209-7">]</span><span class="w">
-  </span><span class="p" data-group-id="6897271209-8">[</span><span class="w">
-    </span><span class="p" data-group-id="6897271209-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="6897271209-9">]</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="6897271209-10">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="6897271209-10">]</span><span class="w">
-  </span><span class="p" data-group-id="6897271209-8">]</span><span class="w">
-</span><span class="p" data-group-id="6897271209-5">&gt;</span></code></pre>
+</span><span class="p" data-group-id="1438043808-5">#</span><span class="nc" data-group-id="1438043808-5">Nx.Tensor</span><span class="p" data-group-id="1438043808-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="1438043808-6">[</span><span class="mi">2</span><span class="p" data-group-id="1438043808-6">]</span><span class="p" data-group-id="1438043808-7">[</span><span class="mi">2</span><span class="p" data-group-id="1438043808-7">]</span><span class="w">
+  </span><span class="p" data-group-id="1438043808-8">[</span><span class="w">
+    </span><span class="p" data-group-id="1438043808-9">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="1438043808-9">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="1438043808-10">[</span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p" data-group-id="1438043808-10">]</span><span class="w">
+  </span><span class="p" data-group-id="1438043808-8">]</span><span class="w">
+</span><span class="p" data-group-id="1438043808-5">&gt;</span></code></pre>
   </section>
 </section>
 <section class="detail" id="orthogonal/1">
@@ -826,13 +822,13 @@ and <code class="inline">distribution: :uniform</code>.</p><h2 id="lecun_uniform
     <span id="orthogonal/0"></span>
 
   <div class="detail-header">
-    <a href="#orthogonal/1" class="detail-link" title="Link to this function">
+    <a href="#orthogonal/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">orthogonal(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L671" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L671" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -857,19 +853,19 @@ Defaults to <code class="inline">:normal</code></li></ul><h2 id="orthogonal/1-ex
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">orthogonal</span><span class="p" data-group-id="5319963992-1">(</span><span class="p" data-group-id="5319963992-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="5319963992-2">(</span><span class="p" data-group-id="5319963992-3">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="5319963992-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5319963992-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5319963992-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="5319963992-5">(</span><span class="mi">1</span><span class="p" data-group-id="5319963992-5">)</span><span class="p" data-group-id="5319963992-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="5319963992-6">(</span><span class="n">t</span><span class="p" data-group-id="5319963992-6">)</span><span class="w">
-</span><span class="p" data-group-id="5319963992-7">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="5319963992-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="5319963992-8">(</span><span class="n">t</span><span class="p" data-group-id="5319963992-8">)</span><span class="w">
-</span><span class="p" data-group-id="5319963992-9">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="5319963992-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">orthogonal</span><span class="p" data-group-id="7484510406-1">(</span><span class="p" data-group-id="7484510406-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="7484510406-2">(</span><span class="p" data-group-id="7484510406-3">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="7484510406-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7484510406-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7484510406-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="7484510406-5">(</span><span class="mi">1</span><span class="p" data-group-id="7484510406-5">)</span><span class="p" data-group-id="7484510406-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="7484510406-6">(</span><span class="n">t</span><span class="p" data-group-id="7484510406-6">)</span><span class="w">
+</span><span class="p" data-group-id="7484510406-7">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7484510406-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="7484510406-8">(</span><span class="n">t</span><span class="p" data-group-id="7484510406-8">)</span><span class="w">
+</span><span class="p" data-group-id="7484510406-9">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p" data-group-id="7484510406-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">orthogonal</span><span class="p" data-group-id="5319963992-10">(</span><span class="p" data-group-id="5319963992-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="5319963992-11">(</span><span class="p" data-group-id="5319963992-12">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p" data-group-id="5319963992-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5319963992-13">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p" data-group-id="5319963992-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="5319963992-14">(</span><span class="mi">1</span><span class="p" data-group-id="5319963992-14">)</span><span class="p" data-group-id="5319963992-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="5319963992-15">(</span><span class="n">t</span><span class="p" data-group-id="5319963992-15">)</span><span class="w">
-</span><span class="p" data-group-id="5319963992-16">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p" data-group-id="5319963992-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="5319963992-17">(</span><span class="n">t</span><span class="p" data-group-id="5319963992-17">)</span><span class="w">
-</span><span class="p" data-group-id="5319963992-18">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p" data-group-id="5319963992-18">}</span></code></pre>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">orthogonal</span><span class="p" data-group-id="7484510406-10">(</span><span class="p" data-group-id="7484510406-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="7484510406-11">(</span><span class="p" data-group-id="7484510406-12">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p" data-group-id="7484510406-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7484510406-13">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p" data-group-id="7484510406-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="7484510406-14">(</span><span class="mi">1</span><span class="p" data-group-id="7484510406-14">)</span><span class="p" data-group-id="7484510406-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="7484510406-15">(</span><span class="n">t</span><span class="p" data-group-id="7484510406-15">)</span><span class="w">
+</span><span class="p" data-group-id="7484510406-16">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p" data-group-id="7484510406-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="7484510406-17">(</span><span class="n">t</span><span class="p" data-group-id="7484510406-17">)</span><span class="w">
+</span><span class="p" data-group-id="7484510406-18">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p" data-group-id="7484510406-18">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="uniform/1">
@@ -877,13 +873,13 @@ Defaults to <code class="inline">:normal</code></li></ul><h2 id="orthogonal/1-ex
     <span id="uniform/0"></span>
 
   <div class="detail-header">
-    <a href="#uniform/1" class="detail-link" title="Link to this function">
+    <a href="#uniform/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">uniform(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L176" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L176" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -905,19 +901,19 @@ Defaults to <code class="inline">:normal</code></li></ul><h2 id="orthogonal/1-ex
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">uniform</span><span class="p" data-group-id="0494571570-1">(</span><span class="p" data-group-id="0494571570-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="0494571570-2">(</span><span class="p" data-group-id="0494571570-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0494571570-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0494571570-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="0494571570-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="0494571570-5">(</span><span class="mi">1</span><span class="p" data-group-id="0494571570-5">)</span><span class="p" data-group-id="0494571570-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="0494571570-6">(</span><span class="n">t</span><span class="p" data-group-id="0494571570-6">)</span><span class="w">
-</span><span class="p" data-group-id="0494571570-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0494571570-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="0494571570-8">(</span><span class="n">t</span><span class="p" data-group-id="0494571570-8">)</span><span class="w">
-</span><span class="p" data-group-id="0494571570-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="0494571570-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">uniform</span><span class="p" data-group-id="0610376648-1">(</span><span class="p" data-group-id="0610376648-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="0610376648-2">(</span><span class="p" data-group-id="0610376648-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0610376648-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0610376648-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="0610376648-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="0610376648-5">(</span><span class="mi">1</span><span class="p" data-group-id="0610376648-5">)</span><span class="p" data-group-id="0610376648-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="0610376648-6">(</span><span class="n">t</span><span class="p" data-group-id="0610376648-6">)</span><span class="w">
+</span><span class="p" data-group-id="0610376648-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0610376648-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="0610376648-8">(</span><span class="n">t</span><span class="p" data-group-id="0610376648-8">)</span><span class="w">
+</span><span class="p" data-group-id="0610376648-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="0610376648-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">uniform</span><span class="p" data-group-id="0494571570-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="0494571570-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="0494571570-11">(</span><span class="p" data-group-id="0494571570-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0494571570-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0494571570-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="0494571570-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="0494571570-14">(</span><span class="mi">1</span><span class="p" data-group-id="0494571570-14">)</span><span class="p" data-group-id="0494571570-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="0494571570-15">(</span><span class="n">t</span><span class="p" data-group-id="0494571570-15">)</span><span class="w">
-</span><span class="p" data-group-id="0494571570-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0494571570-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="0494571570-17">(</span><span class="n">t</span><span class="p" data-group-id="0494571570-17">)</span><span class="w">
-</span><span class="p" data-group-id="0494571570-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="0494571570-18">}</span></code></pre>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">uniform</span><span class="p" data-group-id="0610376648-10">(</span><span class="ss">scale</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0e-3</span><span class="p" data-group-id="0610376648-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="0610376648-11">(</span><span class="p" data-group-id="0610376648-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0610376648-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0610376648-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="0610376648-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="0610376648-14">(</span><span class="mi">1</span><span class="p" data-group-id="0610376648-14">)</span><span class="p" data-group-id="0610376648-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="0610376648-15">(</span><span class="n">t</span><span class="p" data-group-id="0610376648-15">)</span><span class="w">
+</span><span class="p" data-group-id="0610376648-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="0610376648-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="0610376648-17">(</span><span class="n">t</span><span class="p" data-group-id="0610376648-17">)</span><span class="w">
+</span><span class="p" data-group-id="0610376648-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="0610376648-18">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="variance_scaling/1">
@@ -925,13 +921,13 @@ Defaults to <code class="inline">:normal</code></li></ul><h2 id="orthogonal/1-ex
     <span id="variance_scaling/0"></span>
 
   <div class="detail-header">
-    <a href="#variance_scaling/1" class="detail-link" title="Link to this function">
+    <a href="#variance_scaling/1" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">variance_scaling(opts \\ [])</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L557" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L557" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -957,38 +953,38 @@ or <code class="inline">:uniform</code>. Defaults to <code class="inline">:norma
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">variance_scaling</span><span class="p" data-group-id="3869197393-1">(</span><span class="p" data-group-id="3869197393-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="3869197393-2">(</span><span class="p" data-group-id="3869197393-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3869197393-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3869197393-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3869197393-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="3869197393-5">(</span><span class="mi">1</span><span class="p" data-group-id="3869197393-5">)</span><span class="p" data-group-id="3869197393-2">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="3869197393-6">(</span><span class="n">t</span><span class="p" data-group-id="3869197393-6">)</span><span class="w">
-</span><span class="p" data-group-id="3869197393-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3869197393-7">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="3869197393-8">(</span><span class="n">t</span><span class="p" data-group-id="3869197393-8">)</span><span class="w">
-</span><span class="p" data-group-id="3869197393-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3869197393-9">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">variance_scaling</span><span class="p" data-group-id="6277050483-1">(</span><span class="p" data-group-id="6277050483-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="6277050483-2">(</span><span class="p" data-group-id="6277050483-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6277050483-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6277050483-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6277050483-4">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="6277050483-5">(</span><span class="mi">1</span><span class="p" data-group-id="6277050483-5">)</span><span class="p" data-group-id="6277050483-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="6277050483-6">(</span><span class="n">t</span><span class="p" data-group-id="6277050483-6">)</span><span class="w">
+</span><span class="p" data-group-id="6277050483-7">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6277050483-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="6277050483-8">(</span><span class="n">t</span><span class="p" data-group-id="6277050483-8">)</span><span class="w">
+</span><span class="p" data-group-id="6277050483-9">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6277050483-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">variance_scaling</span><span class="p" data-group-id="3869197393-10">(</span><span class="ss">mode</span><span class="p">:</span><span class="w"> </span><span class="ss">:fan_out</span><span class="p">,</span><span class="w"> </span><span class="ss">distribution</span><span class="p">:</span><span class="w"> </span><span class="ss">:truncated_normal</span><span class="p" data-group-id="3869197393-10">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="3869197393-11">(</span><span class="p" data-group-id="3869197393-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3869197393-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3869197393-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3869197393-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="3869197393-14">(</span><span class="mi">1</span><span class="p" data-group-id="3869197393-14">)</span><span class="p" data-group-id="3869197393-11">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="3869197393-15">(</span><span class="n">t</span><span class="p" data-group-id="3869197393-15">)</span><span class="w">
-</span><span class="p" data-group-id="3869197393-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3869197393-16">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="3869197393-17">(</span><span class="n">t</span><span class="p" data-group-id="3869197393-17">)</span><span class="w">
-</span><span class="p" data-group-id="3869197393-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="3869197393-18">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">variance_scaling</span><span class="p" data-group-id="6277050483-10">(</span><span class="ss">mode</span><span class="p">:</span><span class="w"> </span><span class="ss">:fan_out</span><span class="p">,</span><span class="w"> </span><span class="ss">distribution</span><span class="p">:</span><span class="w"> </span><span class="ss">:truncated_normal</span><span class="p" data-group-id="6277050483-10">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="6277050483-11">(</span><span class="p" data-group-id="6277050483-12">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6277050483-12">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6277050483-13">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="6277050483-13">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="6277050483-14">(</span><span class="mi">1</span><span class="p" data-group-id="6277050483-14">)</span><span class="p" data-group-id="6277050483-11">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="6277050483-15">(</span><span class="n">t</span><span class="p" data-group-id="6277050483-15">)</span><span class="w">
+</span><span class="p" data-group-id="6277050483-16">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="6277050483-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="6277050483-17">(</span><span class="n">t</span><span class="p" data-group-id="6277050483-17">)</span><span class="w">
+</span><span class="p" data-group-id="6277050483-18">{</span><span class="ss">:bf</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p" data-group-id="6277050483-18">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">variance_scaling</span><span class="p" data-group-id="3869197393-19">(</span><span class="ss">mode</span><span class="p">:</span><span class="w"> </span><span class="ss">:fan_out</span><span class="p">,</span><span class="w"> </span><span class="ss">distribution</span><span class="p">:</span><span class="w"> </span><span class="ss">:normal</span><span class="p" data-group-id="3869197393-19">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="3869197393-20">(</span><span class="p" data-group-id="3869197393-21">{</span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3869197393-21">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3869197393-22">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3869197393-22">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="3869197393-23">(</span><span class="mi">1</span><span class="p" data-group-id="3869197393-23">)</span><span class="p" data-group-id="3869197393-20">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="3869197393-24">(</span><span class="n">t</span><span class="p" data-group-id="3869197393-24">)</span><span class="w">
-</span><span class="p" data-group-id="3869197393-25">{</span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3869197393-25">}</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="3869197393-26">(</span><span class="n">t</span><span class="p" data-group-id="3869197393-26">)</span><span class="w">
-</span><span class="p" data-group-id="3869197393-27">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="3869197393-27">}</span></code></pre>
+</span><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">variance_scaling</span><span class="p" data-group-id="6277050483-19">(</span><span class="ss">mode</span><span class="p">:</span><span class="w"> </span><span class="ss">:fan_out</span><span class="p">,</span><span class="w"> </span><span class="ss">distribution</span><span class="p">:</span><span class="w"> </span><span class="ss">:normal</span><span class="p" data-group-id="6277050483-19">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="6277050483-20">(</span><span class="p" data-group-id="6277050483-21">{</span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6277050483-21">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6277050483-22">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6277050483-22">}</span><span class="p">,</span><span class="w"> </span><span class="nc">Nx.Random</span><span class="o">.</span><span class="n">key</span><span class="p" data-group-id="6277050483-23">(</span><span class="mi">1</span><span class="p" data-group-id="6277050483-23">)</span><span class="p" data-group-id="6277050483-20">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">shape</span><span class="p" data-group-id="6277050483-24">(</span><span class="n">t</span><span class="p" data-group-id="6277050483-24">)</span><span class="w">
+</span><span class="p" data-group-id="6277050483-25">{</span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6277050483-25">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Nx</span><span class="o">.</span><span class="n">type</span><span class="p" data-group-id="6277050483-26">(</span><span class="n">t</span><span class="p" data-group-id="6277050483-26">)</span><span class="w">
+</span><span class="p" data-group-id="6277050483-27">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="6277050483-27">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="zeros/0">
 
   <div class="detail-header">
-    <a href="#zeros/0" class="detail-link" title="Link to this function">
+    <a href="#zeros/0" class="detail-link" data-no-tooltip title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">zeros()</h1>
 
-      <a href="https://github.com/elixir-nx/axon/blob/v0.6.1/lib/axon/initializers.ex#L60" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/elixir-nx/axon/blob/v0.7.0/lib/axon/initializers.ex#L60" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1004,57 +1000,56 @@ or <code class="inline">:uniform</code>. Defaults to <code class="inline">:norma
   </a>
   <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">zeros</span><span class="p" data-group-id="2630031637-1">(</span><span class="p" data-group-id="2630031637-1">)</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="2630031637-2">(</span><span class="p" data-group-id="2630031637-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="2630031637-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2630031637-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="2630031637-4">}</span><span class="p" data-group-id="2630031637-2">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="n">init_fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Axon.Initializers</span><span class="o">.</span><span class="n">zeros</span><span class="p" data-group-id="7535088993-1">(</span><span class="p" data-group-id="7535088993-1">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init_fn</span><span class="o">.</span><span class="p" data-group-id="7535088993-2">(</span><span class="p" data-group-id="7535088993-3">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="7535088993-3">}</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7535088993-4">{</span><span class="ss">:f</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p" data-group-id="7535088993-4">}</span><span class="p" data-group-id="7535088993-2">)</span><span class="w">
 </span><span class="gp unselectable">iex&gt; </span><span class="n">out</span><span class="w">
-</span><span class="p" data-group-id="2630031637-5">#</span><span class="nc" data-group-id="2630031637-5">Nx.Tensor</span><span class="p" data-group-id="2630031637-5">&lt;</span><span class="w">
-  </span><span class="n">f32</span><span class="p" data-group-id="2630031637-6">[</span><span class="mi">2</span><span class="p" data-group-id="2630031637-6">]</span><span class="p" data-group-id="2630031637-7">[</span><span class="mi">2</span><span class="p" data-group-id="2630031637-7">]</span><span class="w">
-  </span><span class="p" data-group-id="2630031637-8">[</span><span class="w">
-    </span><span class="p" data-group-id="2630031637-9">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="2630031637-9">]</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="2630031637-10">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="2630031637-10">]</span><span class="w">
-  </span><span class="p" data-group-id="2630031637-8">]</span><span class="w">
-</span><span class="p" data-group-id="2630031637-5">&gt;</span></code></pre>
+</span><span class="p" data-group-id="7535088993-5">#</span><span class="nc" data-group-id="7535088993-5">Nx.Tensor</span><span class="p" data-group-id="7535088993-5">&lt;</span><span class="w">
+  </span><span class="n">f32</span><span class="p" data-group-id="7535088993-6">[</span><span class="mi">2</span><span class="p" data-group-id="7535088993-6">]</span><span class="p" data-group-id="7535088993-7">[</span><span class="mi">2</span><span class="p" data-group-id="7535088993-7">]</span><span class="w">
+  </span><span class="p" data-group-id="7535088993-8">[</span><span class="w">
+    </span><span class="p" data-group-id="7535088993-9">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="7535088993-9">]</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="7535088993-10">[</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p" data-group-id="7535088993-10">]</span><span class="w">
+  </span><span class="p" data-group-id="7535088993-8">]</span><span class="w">
+</span><span class="p" data-group-id="7535088993-5">&gt;</span></code></pre>
   </section>
 </section>
 
     </div>
   </section>
 
-      <footer class="footer">
-        <p>
-
-            <span class="line">
-              <a href="https://hex.pm/packages/axon/0.6.1" class="footer-hex-package">Hex Package</a>
-
-              <a href="https://preview.hex.pm/preview/axon/0.6.1">Hex Preview</a>
-
-            </span>
+    <footer class="footer">
+      <p>
 
           <span class="line">
-            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
-              Search HexDocs
-            </button>
+            <a href="https://hex.pm/packages/axon/0.7.0" class="footer-hex-package">Hex Package</a>
 
-              <a href="Axon.epub" title="ePub version">
-                Download ePub version
-              </a>
+            <a href="https://preview.hex.pm/preview/axon/0.7.0">Hex Preview</a>
 
           </span>
-        </p>
 
-        <p class="built-using">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.31.1) for the
+        <span class="line">
+          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+            Search HexDocs
+          </button>
 
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+            <a href="Axon.epub" title="ePub version">
+              Download ePub version
+            </a>
 
-        </p>
-      </footer>
-    </div>
+        </span>
+      </p>
+
+      <p class="built-using">
+        Built using
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.34.2) for the
+
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+      </p>
+
+    </footer>
   </div>
 </main>
 </div>
-
 <!-- Render math with KaTeX -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.css" integrity="sha384-t5CR+zwDAROtph0PXGte6ia8heboACF9R5l/DiY+WZ3P2lxNgvJkQk5n7GPvLMYw" crossorigin="anonymous">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.0/dist/katex.min.js" integrity="sha384-FaFLTlohFghEIZkw6VGwmf9ISTubWAVYW8tG8+w2LAIftJEULZABrF9PPFv+tVkH" crossorigin="anonymous"></script>
